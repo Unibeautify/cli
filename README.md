@@ -1,21 +1,36 @@
 # Unibeautify-CLI
 
-> CLI for Unibeautify
+> CLI for [Unibeautify](https://github.com/Unibeautify/unibeautify)
 
 ## Installation
 
 ```bash
-npm install --global unibeautify-cli
+$ npm install --global unibeautify-cli
 ```
 
 ## Usage
 
-The global package will install a need command: `unibeautify`.
+The package will be globally accessible as a new command-line interface (CLI) application called [`unibeautify`](https://github.com/Unibeautify/unibeautify).
 
 ### Help
 
+**Note**: Not all options are currently supported.
+
 ```bash
-unibeautify --help
+$ unibeautify --help
+
+  Usage: unibeautify [options] [files...]
+
+  Options:
+
+    -h, --help                 output usage information
+    -V, --version              output the version number
+    -l, --language <language>  Language of file to beautify
+    -o, --out-file <file>      Output file of beautified results
+    -r, --replace              Replace file(s) with beautified results
+    -c, --config-file <file>   Beautifier configuration file
+    --config-json <JSON>       Beautifier configuration as stringified JSON
+
 ```
 
 ### Example
@@ -23,13 +38,13 @@ unibeautify --help
 Install a Beautifier, such as [`beautifier-prettydiff`](https://github.com/Unibeautify/beautifier-prettydiff):
 
 ```
-npm install --global beautifier-prettydiff
+$ npm install --global beautifier-prettydiff
 ```
 
 Then beautify using a language that Beautifier supports:
 
 ```bash
-echo "function(n){return n+1;}" | unibeautify --language JavaScript --config-json '{"JavaScript":{"insize":2,"inchar":" "}}'
+$ echo "function(n){return n+1;}" | unibeautify --language JavaScript --config-json '{"JavaScript":{"insize":2,"inchar":" "}}'
 ```
 
 This returns the following formatted result:
