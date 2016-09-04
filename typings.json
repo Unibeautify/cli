@@ -1,0 +1,10 @@
+{
+  "name": "unibeautify-cli",
+  "dependencies": {
+    "cross-spawn": "file:typings/custom/cross-spawn.d.ts"
+  },
+  "globalDependencies": {
+    "commander": "registry:dt/commander#2.3.0+20160317120654",
+    "node": "registry:dt/node#6.0.0+20160831021119"
+  }
+}
