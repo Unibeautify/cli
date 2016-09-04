@@ -20,7 +20,7 @@ unibeautify --help
 
 ### Example
 
-Install a Beautifier:
+Install a Beautifier, such as [`beautifier-prettydiff`](https://github.com/Unibeautify/beautifier-prettydiff):
 
 ```
 npm install --global beautifier-prettydiff
@@ -30,4 +30,12 @@ Then beautify using a language that Beautifier supports:
 
 ```bash
 echo "function(n){return n+1;}" | unibeautify --language JavaScript --config-json '{"JavaScript":{"insize":2,"inchar":" "}}'
+```
+
+This returns the following formatted result:
+
+```javascript
+function (n) {
+    return n + 1;
+}                                                                                
 ```
