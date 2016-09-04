@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "6.5"
+  - "6.1"
+  - "6"
+  - "5.11"
+  - "4.0"
+script:
+  - npm run lint
+  # - npm test

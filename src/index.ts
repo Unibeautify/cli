@@ -1,7 +1,7 @@
-import unibeautify, {Unibeautify, Language, Beautifier, BeautifierBeautifyData } from 'unibeautify';
-import * as path from 'path';
-import requireg = require('requireg');
-import findGlobalPackages = require('find-global-packages');
+import unibeautify, {Unibeautify, Language, Beautifier, BeautifierBeautifyData } from "unibeautify";
+import * as path from "path";
+import requireg = require("requireg");
+import findGlobalPackages = require("find-global-packages");
 
 /**
 Find all globally installed beautifiers.
@@ -17,7 +17,7 @@ export function findInstalledBeautifiers(): Promise<string[]> {
         return /beautifier-.*/.test(name);
       });
       return resolve(beautifierNames);
-    })
+    });
   });
 }
 
