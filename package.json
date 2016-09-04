@@ -10,7 +10,7 @@
     "compile": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "typedoc --out docs --includeDeclarations typings/*.ts --module commonjs src",
-    "prepublish": "npm run compile",
+    "prepublish": "npm-run-all typings compile",
     "lint:src": "tslint src/**/*.ts",
     "lint": "npm-run-all compile lint:*",
     "typings": "typings install"
