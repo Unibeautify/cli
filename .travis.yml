@@ -1,16 +1,19 @@
 language: node_js
 node_js:
-  - "6.5"
-  - "6.1"
   - "6"
-  - "5.11"
-  - "4.0"
+  - "5"
+  - "4"
 os:
   - linux
   - osx
 cache:
   directories:
   - node_modules # NPM packages
+  - typings # TypeScript Typings
 script:
   - npm run lint
   # - npm test
+notifications:
+  email:
+    on_success: never
+    on_failure: change
