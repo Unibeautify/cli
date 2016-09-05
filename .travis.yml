@@ -5,6 +5,9 @@ node_js:
   - "6"
   - "5.11"
   - "4.0"
+os:
+  - linux
+  - osx
 script:
   - npm run lint
   # - npm test
