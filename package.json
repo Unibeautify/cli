@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/Unibeautify/unibeautify-cli#readme",
   "engines": {
-    "node": ">=4"
+    "node": ">=6.0.0"
   },
   "devDependencies": {
     "npm-run-all": "^3.0.0",
