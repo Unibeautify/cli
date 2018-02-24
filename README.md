@@ -1,5 +1,7 @@
 # Unibeautify-CLI
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Unibeautify/unibeautify-cli.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/Unibeautify/unibeautify-cli.svg?branch=master)](https://travis-ci.org/Unibeautify/unibeautify-cli)
 
 > CLI for [Unibeautify](https://github.com/Unibeautify/unibeautify)
