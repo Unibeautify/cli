@@ -25,7 +25,7 @@ program
 /**
 Arguments parsed for program.
 */
-interface IArgs extends commander.ICommand {
+interface IArgs extends program.ParseOptionsResult {
   args: string[];
   language?: string;
   outFile?: string;
@@ -34,7 +34,7 @@ interface IArgs extends commander.ICommand {
   configJson?: string;
 }
 
-const programArgs: IArgs = program.parse(process.argv);
+const programArgs = program.parse(process.argv);
 
 const {
   args: files,
@@ -83,7 +83,7 @@ setupUnibeautify()
       if (err.code === "EPIPE") {
         return process.exit(1);
       }
-      process.emit("error", err);
+      process.emit("warning", err);
     });
   } else {
     // Process files
