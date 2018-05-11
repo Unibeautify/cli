@@ -1,6 +1,6 @@
 # Unibeautify-CLI
 
-[![Build Status](https://travis-ci.org/Unibeautify/unibeautify-cli.svg?branch=master)](https://travis-ci.org/Unibeautify/unibeautify-cli)
+[![Build Status](https://travis-ci.com/Unibeautify/unibeautify-cli.svg?branch=master)](https://travis-ci.com/Unibeautify/unibeautify-cli)
 
 > CLI for [Unibeautify](https://github.com/Unibeautify/unibeautify)
 
