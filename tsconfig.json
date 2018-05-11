@@ -10,7 +10,6 @@
         "moduleResolution": "node"
     },
     "filesGlob": [
-        "./typings/**/*.d.ts",
         "./src/**/*.ts",
         "./script/**/*.ts",
         "./test/**/*.ts"

@@ -1,11 +1,8 @@
 # Project
 **/*.js
 **/*.js.map
-**/*.d.ts
-typings/globals/
-typings/modules/
-!typings/custom/**/*.d.ts
 docs
+dist
 
 ### https://raw.github.com/github/gitignore/77e29837cf03b59fc4d885ea011bbd683caaaf85/node.gitignore
 
