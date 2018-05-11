@@ -7,7 +7,8 @@
         "sourceMap": true,
         "target": "ES6",
         "declaration": true,
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "outDir": "dist"
     },
     "filesGlob": [
         "./src/**/*.ts",
@@ -15,6 +16,6 @@
         "./test/**/*.ts"
     ],
     "exclude": [
-        "node_modules"
+        "./node_modules"
     ]
 }
