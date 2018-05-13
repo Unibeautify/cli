@@ -25,7 +25,7 @@ program
 /**
 Arguments parsed for program.
 */
-interface IArgs extends program.ParseOptionsResult {
+interface IArgs extends program.Command {
   args: string[];
   language?: string;
   outFile?: string;
@@ -34,7 +34,7 @@ interface IArgs extends program.ParseOptionsResult {
   configJson?: string;
 }
 
-const programArgs = program.parse(process.argv);
+const programArgs: IArgs = program.parse(process.argv);
 
 const {
   args: files,
