@@ -25,7 +25,7 @@ program
 /**
 Arguments parsed for program.
 */
-interface IArgs extends commander.ICommand {
+interface IArgs extends program.Command {
   args: string[];
   language?: string;
   outFile?: string;
@@ -83,7 +83,7 @@ setupUnibeautify()
       if (err.code === "EPIPE") {
         return process.exit(1);
       }
-      process.emit("error", err);
+      process.emit("warning", err);
     });
   } else {
     // Process files

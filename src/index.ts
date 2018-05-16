@@ -1,7 +1,7 @@
 import unibeautify, {Unibeautify, Language, Beautifier, BeautifierBeautifyData } from "unibeautify";
 import * as path from "path";
-import requireg = require("requireg");
 import findGlobalPackages = require("find-global-packages");
+const requireg = require("requireg");
 
 /**
 Find all globally installed beautifiers.
