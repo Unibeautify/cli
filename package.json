@@ -55,6 +55,6 @@
     "cross-spawn": "^6.0.5",
     "find-global-packages": "0.0.1",
     "requireg": "^0.1.5",
-    "unibeautify": "^0.14.0"
+    "unibeautify": "^0.15.0"
   }
 }
