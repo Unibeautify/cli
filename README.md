@@ -40,7 +40,7 @@ $ unibeautify --help
 Install a Beautifier, such as [`beautifier-prettydiff`](https://github.com/Unibeautify/beautifier-prettydiff):
 
 ```
-$ npm install --global beautifier-prettydiff
+$ npm install --global @unibeautify/beautifier-prettydiff
 ```
 
 Then beautify using a language that Beautifier supports:
