@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 import * as program from "commander";
-import * as spawn from "cross-spawn";
 import { setupUnibeautify } from "./index";
 const pkg = require("../package.json");
 
@@ -13,6 +12,7 @@ program
   .usage("[options] [files...]")
   .option("-l, --language <language>", "Language of file to beautify")
   // .option("-i, --input-file [file]", "Input file to be beautified")
+  .option("-f, --file-path <file path>", "Path of the file to beautify from stdin")
   .option("-o, --out-file <file>", "Output file of beautified results")
   .option("-r, --replace", "Replace file(s) with beautified results", false)
   .option("-c, --config-file <file>", "Beautifier configuration file")
@@ -32,6 +32,7 @@ interface IArgs extends program.Command {
   replace?: boolean;
   configFile?: string;
   configJson?: string;
+  filePath?: string;
 }
 
 const programArgs: IArgs = program.parse(process.argv);
@@ -42,7 +43,8 @@ const {
   outFile,
   replace,
   configFile,
-  configJson
+  configJson,
+  filePath
 } = programArgs;
 
 setupUnibeautify()
@@ -62,21 +64,30 @@ setupUnibeautify()
       return process.exit(1);
     }
   }
-  /**
-  Process stdin or provided files.
-  */
-  if (files.length === 0) {
-    // Process stdin
-    // console.log("No files provided");
+
+  if (process.stdin.isTTY) {
+    console.error("Beautify files is not yet supported.");
+    return process.exit(1);
+  }
+  else {
+    let text = "";
     process.stdin.resume();
     process.stdin.on("data", (data: string) => {
-      // process.stdout.write(`${new Date()}: ${data}`)
+        text = data.toString();
+    });
+    process.stdin.on("end", () => {
+      console.log({filePath, language, config, text});
       unibeautify.beautify({
+        filePath: filePath,
         languageName: language,
         options: config,
-        text: data.toString(),
+        text,
       }).then((result: string) => {
-        process.stdout.write(result);
+        process.stdout.write(result + "\n");
+        return process.exit(0);
+      }).catch((error: Error) => {
+        process.stderr.write(error.message + "\n");
+        return process.exit(1);
       });
     });
     process.stdout.on("error", (err: any) => {
@@ -85,11 +96,6 @@ setupUnibeautify()
       }
       process.emit("warning", err);
     });
-  } else {
-    // Process files
-    // console.log("Files", files);
-    console.error("Beautify files is not yet supported.");
-    return process.exit(1);
   }
 
 });

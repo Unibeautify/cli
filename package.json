@@ -51,7 +51,7 @@
     "typescript": "2.9.2"
   },
   "dependencies": {
-    "commander": "^2.9.0",
+    "commander": "^2.15.1",
     "cross-spawn": "^6.0.5",
     "find-global-packages": "0.0.1",
     "requireg": "^0.1.8",
