@@ -49,7 +49,7 @@ setupUnibeautify()
 .then((unibeautify) => {
 
   if (!language) {
-    process.stderr.write("A language is required.");
+    console.error("A language is required.");
     return process.exit(1);
   }
 
@@ -58,7 +58,7 @@ setupUnibeautify()
     try {
       config = JSON.parse(configJson);
     } catch (e) {
-      process.stderr.write(e.message);
+      console.error("%s", e.message);
       return process.exit(1);
     }
   }
@@ -88,7 +88,7 @@ setupUnibeautify()
   } else {
     // Process files
     // console.log("Files", files);
-    process.stderr.write("Beautify files is not yet supported.");
+    console.error("Beautify files is not yet supported.");
     return process.exit(1);
   }
 
