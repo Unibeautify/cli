@@ -76,17 +76,16 @@ setupUnibeautify()
         text = data.toString();
     });
     process.stdin.on("end", () => {
-      console.log({filePath, language, config, text});
       unibeautify.beautify({
         filePath: filePath,
         languageName: language,
         options: config,
         text,
       }).then((result: string) => {
-        process.stdout.write(result + "\n");
+        console.log(result);
         return process.exit(0);
       }).catch((error: Error) => {
-        process.stderr.write(error.message + "\n");
+        console.error(error.message);
         return process.exit(1);
       });
     });
