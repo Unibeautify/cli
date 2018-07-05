@@ -10,6 +10,7 @@ cache:
   - node_modules # NPM packages
 script:
   - npm run lint
+  - npm run build
   - npm test
 notifications:
   email:
