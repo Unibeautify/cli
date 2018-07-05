@@ -1,0 +1,979 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Runner Support with JSON languages 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "{
+  \\"languages\\": [
+    \\"1C Enterprise\\",
+    \\"ABAP\\",
+    \\"ABNF\\",
+    \\"AGS Script\\",
+    \\"AMPL\\",
+    \\"ANTLR\\",
+    \\"API Blueprint\\",
+    \\"APL\\",
+    \\"ASN.1\\",
+    \\"ASP\\",
+    \\"ATS\\",
+    \\"ActionScript\\",
+    \\"Ada\\",
+    \\"Adobe Font Metrics\\",
+    \\"Agda\\",
+    \\"Alloy\\",
+    \\"Alpine Abuild\\",
+    \\"AngelScript\\",
+    \\"Ant Build System\\",
+    \\"ApacheConf\\",
+    \\"Apex\\",
+    \\"Apollo Guidance Computer\\",
+    \\"AppleScript\\",
+    \\"Arc\\",
+    \\"Arduino\\",
+    \\"AsciiDoc\\",
+    \\"AspectJ\\",
+    \\"Assembly\\",
+    \\"Augeas\\",
+    \\"AutoHotkey\\",
+    \\"AutoIt\\",
+    \\"Awk\\",
+    \\"Ballerina\\",
+    \\"Batchfile\\",
+    \\"Befunge\\",
+    \\"Bison\\",
+    \\"BitBake\\",
+    \\"Blade\\",
+    \\"BlitzBasic\\",
+    \\"BlitzMax\\",
+    \\"Bluespec\\",
+    \\"Boo\\",
+    \\"Brainfuck\\",
+    \\"Brightscript\\",
+    \\"Bro\\",
+    \\"C\\",
+    \\"C#\\",
+    \\"C++\\",
+    \\"C-ObjDump\\",
+    \\"C2hs Haskell\\",
+    \\"CLIPS\\",
+    \\"CMake\\",
+    \\"COBOL\\",
+    \\"COLLADA\\",
+    \\"CSON\\",
+    \\"CSS\\",
+    \\"CSV\\",
+    \\"CWeb\\",
+    \\"Cap'n Proto\\",
+    \\"CartoCSS\\",
+    \\"Ceylon\\",
+    \\"Chapel\\",
+    \\"Charity\\",
+    \\"ChucK\\",
+    \\"Cirru\\",
+    \\"Clarion\\",
+    \\"Clean\\",
+    \\"Click\\",
+    \\"Clojure\\",
+    \\"Closure Templates\\",
+    \\"CoNLL-U\\",
+    \\"CoffeeScript\\",
+    \\"ColdFusion\\",
+    \\"ColdFusion CFC\\",
+    \\"Common Lisp\\",
+    \\"Common Workflow Language\\",
+    \\"Component Pascal\\",
+    \\"Cool\\",
+    \\"Coq\\",
+    \\"Cpp-ObjDump\\",
+    \\"Creole\\",
+    \\"Crystal\\",
+    \\"Csound\\",
+    \\"Csound Document\\",
+    \\"Csound Score\\",
+    \\"Cuda\\",
+    \\"Cycript\\",
+    \\"Cython\\",
+    \\"D\\",
+    \\"D-ObjDump\\",
+    \\"DIGITAL Command Language\\",
+    \\"DM\\",
+    \\"DNS Zone\\",
+    \\"DTrace\\",
+    \\"Darcs Patch\\",
+    \\"Dart\\",
+    \\"DataWeave\\",
+    \\"Diff\\",
+    \\"Dockerfile\\",
+    \\"Dogescript\\",
+    \\"Dylan\\",
+    \\"E\\",
+    \\"EBNF\\",
+    \\"ECL\\",
+    \\"ECLiPSe\\",
+    \\"EJS\\",
+    \\"EQ\\",
+    \\"Eagle\\",
+    \\"Easybuild\\",
+    \\"Ecere Projects\\",
+    \\"Edje Data Collection\\",
+    \\"Eiffel\\",
+    \\"Elixir\\",
+    \\"Elm\\",
+    \\"Emacs Lisp\\",
+    \\"EmberScript\\",
+    \\"Erlang\\",
+    \\"F#\\",
+    \\"FLUX\\",
+    \\"Factor\\",
+    \\"Fancy\\",
+    \\"Fantom\\",
+    \\"Filebench WML\\",
+    \\"Filterscript\\",
+    \\"Formatted\\",
+    \\"Forth\\",
+    \\"Fortran\\",
+    \\"FreeMarker\\",
+    \\"Frege\\",
+    \\"G-code\\",
+    \\"GAMS\\",
+    \\"GAP\\",
+    \\"GCC Machine Description\\",
+    \\"GDB\\",
+    \\"GDScript\\",
+    \\"GLSL\\",
+    \\"GN\\",
+    \\"Game Maker Language\\",
+    \\"Genie\\",
+    \\"Genshi\\",
+    \\"Gentoo Ebuild\\",
+    \\"Gentoo Eclass\\",
+    \\"Gerber Image\\",
+    \\"Gettext Catalog\\",
+    \\"Gherkin\\",
+    \\"Glyph\\",
+    \\"Gnuplot\\",
+    \\"Go\\",
+    \\"Golo\\",
+    \\"Gosu\\",
+    \\"Grace\\",
+    \\"Gradle\\",
+    \\"Grammatical Framework\\",
+    \\"Graph Modeling Language\\",
+    \\"GraphQL\\",
+    \\"Graphviz (DOT)\\",
+    \\"Groovy\\",
+    \\"Groovy Server Pages\\",
+    \\"HCL\\",
+    \\"HLSL\\",
+    \\"HTML\\",
+    \\"HTML+Django\\",
+    \\"HTML+ECR\\",
+    \\"HTML+EEX\\",
+    \\"HTML+ERB\\",
+    \\"HTML+PHP\\",
+    \\"HTTP\\",
+    \\"Hack\\",
+    \\"Haml\\",
+    \\"Handlebars\\",
+    \\"Harbour\\",
+    \\"Haskell\\",
+    \\"Haxe\\",
+    \\"Hy\\",
+    \\"HyPhy\\",
+    \\"IDL\\",
+    \\"IGOR Pro\\",
+    \\"INI\\",
+    \\"IRC log\\",
+    \\"Idris\\",
+    \\"Inform 7\\",
+    \\"Inno Setup\\",
+    \\"Io\\",
+    \\"Ioke\\",
+    \\"Isabelle\\",
+    \\"Isabelle ROOT\\",
+    \\"J\\",
+    \\"JFlex\\",
+    \\"JSON\\",
+    \\"JSON5\\",
+    \\"JSONLD\\",
+    \\"JSONiq\\",
+    \\"JSX\\",
+    \\"Jasmin\\",
+    \\"Java\\",
+    \\"Java Server Pages\\",
+    \\"JavaScript\\",
+    \\"Jison\\",
+    \\"Jison Lex\\",
+    \\"Jolie\\",
+    \\"Julia\\",
+    \\"Jupyter Notebook\\",
+    \\"KRL\\",
+    \\"KiCad Layout\\",
+    \\"KiCad Legacy Layout\\",
+    \\"KiCad Schematic\\",
+    \\"Kit\\",
+    \\"Kotlin\\",
+    \\"LFE\\",
+    \\"LLVM\\",
+    \\"LOLCODE\\",
+    \\"LSL\\",
+    \\"LabVIEW\\",
+    \\"Lasso\\",
+    \\"Latte\\",
+    \\"Lean\\",
+    \\"Less\\",
+    \\"Lex\\",
+    \\"LilyPond\\",
+    \\"Limbo\\",
+    \\"Linker Script\\",
+    \\"Linux Kernel Module\\",
+    \\"Liquid\\",
+    \\"Literate Agda\\",
+    \\"Literate CoffeeScript\\",
+    \\"Literate Haskell\\",
+    \\"LiveScript\\",
+    \\"Logos\\",
+    \\"Logtalk\\",
+    \\"LookML\\",
+    \\"LoomScript\\",
+    \\"Lua\\",
+    \\"M\\",
+    \\"M4\\",
+    \\"M4Sugar\\",
+    \\"MAXScript\\",
+    \\"MQL4\\",
+    \\"MQL5\\",
+    \\"MTML\\",
+    \\"MUF\\",
+    \\"Makefile\\",
+    \\"Mako\\",
+    \\"Markdown\\",
+    \\"Marko\\",
+    \\"Mask\\",
+    \\"Mathematica\\",
+    \\"Matlab\\",
+    \\"Maven POM\\",
+    \\"Max\\",
+    \\"MediaWiki\\",
+    \\"Mercury\\",
+    \\"Meson\\",
+    \\"Metal\\",
+    \\"MiniD\\",
+    \\"Mirah\\",
+    \\"Modelica\\",
+    \\"Modula-2\\",
+    \\"Module Management System\\",
+    \\"Monkey\\",
+    \\"Moocode\\",
+    \\"MoonScript\\",
+    \\"Mustache\\",
+    \\"Myghty\\",
+    \\"NCL\\",
+    \\"NL\\",
+    \\"NSIS\\",
+    \\"Nearley\\",
+    \\"Nemerle\\",
+    \\"NetLinx\\",
+    \\"NetLinx+ERB\\",
+    \\"NetLogo\\",
+    \\"NewLisp\\",
+    \\"Nextflow\\",
+    \\"Nginx\\",
+    \\"Nim\\",
+    \\"Ninja\\",
+    \\"Nit\\",
+    \\"Nix\\",
+    \\"Nu\\",
+    \\"NumPy\\",
+    \\"OCaml\\",
+    \\"ObjDump\\",
+    \\"Objective-C\\",
+    \\"Objective-C++\\",
+    \\"Objective-J\\",
+    \\"Omgrofl\\",
+    \\"Opa\\",
+    \\"Opal\\",
+    \\"OpenCL\\",
+    \\"OpenEdge ABL\\",
+    \\"OpenRC runscript\\",
+    \\"OpenSCAD\\",
+    \\"OpenType Feature File\\",
+    \\"Org\\",
+    \\"Ox\\",
+    \\"Oxygene\\",
+    \\"Oz\\",
+    \\"P4\\",
+    \\"PAWN\\",
+    \\"PHP\\",
+    \\"PLSQL\\",
+    \\"PLpgSQL\\",
+    \\"POV-Ray SDL\\",
+    \\"Pan\\",
+    \\"Papyrus\\",
+    \\"Parrot\\",
+    \\"Parrot Assembly\\",
+    \\"Parrot Internal Representation\\",
+    \\"Pascal\\",
+    \\"Pep8\\",
+    \\"Perl\\",
+    \\"Perl 6\\",
+    \\"Pic\\",
+    \\"Pickle\\",
+    \\"PicoLisp\\",
+    \\"PigLatin\\",
+    \\"Pike\\",
+    \\"Pod\\",
+    \\"PogoScript\\",
+    \\"Pony\\",
+    \\"PostCSS\\",
+    \\"PostScript\\",
+    \\"PowerBuilder\\",
+    \\"PowerShell\\",
+    \\"Processing\\",
+    \\"Prolog\\",
+    \\"Propeller Spin\\",
+    \\"Protocol Buffer\\",
+    \\"Public Key\\",
+    \\"Pug\\",
+    \\"Puppet\\",
+    \\"Pure Data\\",
+    \\"PureBasic\\",
+    \\"PureScript\\",
+    \\"Python\\",
+    \\"Python console\\",
+    \\"Python traceback\\",
+    \\"QML\\",
+    \\"QMake\\",
+    \\"R\\",
+    \\"RAML\\",
+    \\"RDoc\\",
+    \\"REALbasic\\",
+    \\"REXX\\",
+    \\"RHTML\\",
+    \\"RMarkdown\\",
+    \\"RPC\\",
+    \\"RPM Spec\\",
+    \\"RUNOFF\\",
+    \\"Racket\\",
+    \\"Ragel\\",
+    \\"Rascal\\",
+    \\"Raw token data\\",
+    \\"Reason\\",
+    \\"Rebol\\",
+    \\"Red\\",
+    \\"Redcode\\",
+    \\"Regular Expression\\",
+    \\"Ren'Py\\",
+    \\"RenderScript\\",
+    \\"Ring\\",
+    \\"Riot\\",
+    \\"RobotFramework\\",
+    \\"Roff\\",
+    \\"Rouge\\",
+    \\"Ruby\\",
+    \\"Rust\\",
+    \\"SAS\\",
+    \\"SCSS\\",
+    \\"SMT\\",
+    \\"SPARQL\\",
+    \\"SQF\\",
+    \\"SQL\\",
+    \\"SQLPL\\",
+    \\"SRecode Template\\",
+    \\"STON\\",
+    \\"SVG\\",
+    \\"Sage\\",
+    \\"SaltStack\\",
+    \\"Sass\\",
+    \\"Scala\\",
+    \\"Scaml\\",
+    \\"Scheme\\",
+    \\"Scilab\\",
+    \\"Self\\",
+    \\"ShaderLab\\",
+    \\"Shell\\",
+    \\"ShellSession\\",
+    \\"Shen\\",
+    \\"Slash\\",
+    \\"Slim\\",
+    \\"Smali\\",
+    \\"Smalltalk\\",
+    \\"Smarty\\",
+    \\"Solidity\\",
+    \\"SourcePawn\\",
+    \\"Spacebars\\",
+    \\"Spline Font Database\\",
+    \\"Squirrel\\",
+    \\"Stan\\",
+    \\"Standard ML\\",
+    \\"Stata\\",
+    \\"Stylus\\",
+    \\"SubRip Text\\",
+    \\"Sublime Text Config\\",
+    \\"SugarSS\\",
+    \\"SuperCollider\\",
+    \\"Swift\\",
+    \\"Swig\\",
+    \\"SystemVerilog\\",
+    \\"TI Program\\",
+    \\"TLA\\",
+    \\"TOML\\",
+    \\"TXL\\",
+    \\"Tcl\\",
+    \\"Tcsh\\",
+    \\"TeX\\",
+    \\"Tea\\",
+    \\"Terra\\",
+    \\"Text\\",
+    \\"Textile\\",
+    \\"Thrift\\",
+    \\"Titanium Style Sheets\\",
+    \\"Turing\\",
+    \\"Turtle\\",
+    \\"Twig\\",
+    \\"Type Language\\",
+    \\"TypeScript\\",
+    \\"Unified Parallel C\\",
+    \\"Unity3D Asset\\",
+    \\"Unix Assembly\\",
+    \\"Uno\\",
+    \\"UnrealScript\\",
+    \\"UrWeb\\",
+    \\"VCL\\",
+    \\"VHDL\\",
+    \\"Vala\\",
+    \\"Verilog\\",
+    \\"Vim script\\",
+    \\"Visual Basic\\",
+    \\"Visualforce\\",
+    \\"Volt\\",
+    \\"Vue\\",
+    \\"Wavefront Material\\",
+    \\"Wavefront Object\\",
+    \\"Web Ontology Language\\",
+    \\"WebAssembly\\",
+    \\"WebIDL\\",
+    \\"World of Warcraft Addon Data\\",
+    \\"X10\\",
+    \\"XC\\",
+    \\"XCompose\\",
+    \\"XML\\",
+    \\"XPM\\",
+    \\"XPages\\",
+    \\"XProc\\",
+    \\"XQuery\\",
+    \\"XS\\",
+    \\"XSLT\\",
+    \\"XTemplate\\",
+    \\"Xojo\\",
+    \\"Xtend\\",
+    \\"YAML\\",
+    \\"YANG\\",
+    \\"YARA\\",
+    \\"Yacc\\",
+    \\"Zephir\\",
+    \\"Zimpl\\",
+    \\"desktop\\",
+    \\"eC\\",
+    \\"edn\\",
+    \\"fish\\",
+    \\"mupad\\",
+    \\"nesC\\",
+    \\"ooc\\",
+    \\"reStructuredText\\",
+    \\"wdl\\",
+    \\"wisp\\",
+    \\"xBase\\"
+  ]
+}",
+}
+`;
+
+exports[`Runner Support without JSON languages 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "[34mSupported languages[39m
+[34m[39m1. 1C Enterprise
+2. ABAP
+3. ABNF
+4. AGS Script
+5. AMPL
+6. ANTLR
+7. API Blueprint
+8. APL
+9. ASN.1
+10. ASP
+11. ATS
+12. ActionScript
+13. Ada
+14. Adobe Font Metrics
+15. Agda
+16. Alloy
+17. Alpine Abuild
+18. AngelScript
+19. Ant Build System
+20. ApacheConf
+21. Apex
+22. Apollo Guidance Computer
+23. AppleScript
+24. Arc
+25. Arduino
+26. AsciiDoc
+27. AspectJ
+28. Assembly
+29. Augeas
+30. AutoHotkey
+31. AutoIt
+32. Awk
+33. Ballerina
+34. Batchfile
+35. Befunge
+36. Bison
+37. BitBake
+38. Blade
+39. BlitzBasic
+40. BlitzMax
+41. Bluespec
+42. Boo
+43. Brainfuck
+44. Brightscript
+45. Bro
+46. C
+47. C#
+48. C++
+49. C-ObjDump
+50. C2hs Haskell
+51. CLIPS
+52. CMake
+53. COBOL
+54. COLLADA
+55. CSON
+56. CSS
+57. CSV
+58. CWeb
+59. Cap'n Proto
+60. CartoCSS
+61. Ceylon
+62. Chapel
+63. Charity
+64. ChucK
+65. Cirru
+66. Clarion
+67. Clean
+68. Click
+69. Clojure
+70. Closure Templates
+71. CoNLL-U
+72. CoffeeScript
+73. ColdFusion
+74. ColdFusion CFC
+75. Common Lisp
+76. Common Workflow Language
+77. Component Pascal
+78. Cool
+79. Coq
+80. Cpp-ObjDump
+81. Creole
+82. Crystal
+83. Csound
+84. Csound Document
+85. Csound Score
+86. Cuda
+87. Cycript
+88. Cython
+89. D
+90. D-ObjDump
+91. DIGITAL Command Language
+92. DM
+93. DNS Zone
+94. DTrace
+95. Darcs Patch
+96. Dart
+97. DataWeave
+98. Diff
+99. Dockerfile
+100. Dogescript
+101. Dylan
+102. E
+103. EBNF
+104. ECL
+105. ECLiPSe
+106. EJS
+107. EQ
+108. Eagle
+109. Easybuild
+110. Ecere Projects
+111. Edje Data Collection
+112. Eiffel
+113. Elixir
+114. Elm
+115. Emacs Lisp
+116. EmberScript
+117. Erlang
+118. F#
+119. FLUX
+120. Factor
+121. Fancy
+122. Fantom
+123. Filebench WML
+124. Filterscript
+125. Formatted
+126. Forth
+127. Fortran
+128. FreeMarker
+129. Frege
+130. G-code
+131. GAMS
+132. GAP
+133. GCC Machine Description
+134. GDB
+135. GDScript
+136. GLSL
+137. GN
+138. Game Maker Language
+139. Genie
+140. Genshi
+141. Gentoo Ebuild
+142. Gentoo Eclass
+143. Gerber Image
+144. Gettext Catalog
+145. Gherkin
+146. Glyph
+147. Gnuplot
+148. Go
+149. Golo
+150. Gosu
+151. Grace
+152. Gradle
+153. Grammatical Framework
+154. Graph Modeling Language
+155. GraphQL
+156. Graphviz (DOT)
+157. Groovy
+158. Groovy Server Pages
+159. HCL
+160. HLSL
+161. HTML
+162. HTML+Django
+163. HTML+ECR
+164. HTML+EEX
+165. HTML+ERB
+166. HTML+PHP
+167. HTTP
+168. Hack
+169. Haml
+170. Handlebars
+171. Harbour
+172. Haskell
+173. Haxe
+174. Hy
+175. HyPhy
+176. IDL
+177. IGOR Pro
+178. INI
+179. IRC log
+180. Idris
+181. Inform 7
+182. Inno Setup
+183. Io
+184. Ioke
+185. Isabelle
+186. Isabelle ROOT
+187. J
+188. JFlex
+189. JSON
+190. JSON5
+191. JSONLD
+192. JSONiq
+193. JSX
+194. Jasmin
+195. Java
+196. Java Server Pages
+197. JavaScript
+198. Jison
+199. Jison Lex
+200. Jolie
+201. Julia
+202. Jupyter Notebook
+203. KRL
+204. KiCad Layout
+205. KiCad Legacy Layout
+206. KiCad Schematic
+207. Kit
+208. Kotlin
+209. LFE
+210. LLVM
+211. LOLCODE
+212. LSL
+213. LabVIEW
+214. Lasso
+215. Latte
+216. Lean
+217. Less
+218. Lex
+219. LilyPond
+220. Limbo
+221. Linker Script
+222. Linux Kernel Module
+223. Liquid
+224. Literate Agda
+225. Literate CoffeeScript
+226. Literate Haskell
+227. LiveScript
+228. Logos
+229. Logtalk
+230. LookML
+231. LoomScript
+232. Lua
+233. M
+234. M4
+235. M4Sugar
+236. MAXScript
+237. MQL4
+238. MQL5
+239. MTML
+240. MUF
+241. Makefile
+242. Mako
+243. Markdown
+244. Marko
+245. Mask
+246. Mathematica
+247. Matlab
+248. Maven POM
+249. Max
+250. MediaWiki
+251. Mercury
+252. Meson
+253. Metal
+254. MiniD
+255. Mirah
+256. Modelica
+257. Modula-2
+258. Module Management System
+259. Monkey
+260. Moocode
+261. MoonScript
+262. Mustache
+263. Myghty
+264. NCL
+265. NL
+266. NSIS
+267. Nearley
+268. Nemerle
+269. NetLinx
+270. NetLinx+ERB
+271. NetLogo
+272. NewLisp
+273. Nextflow
+274. Nginx
+275. Nim
+276. Ninja
+277. Nit
+278. Nix
+279. Nu
+280. NumPy
+281. OCaml
+282. ObjDump
+283. Objective-C
+284. Objective-C++
+285. Objective-J
+286. Omgrofl
+287. Opa
+288. Opal
+289. OpenCL
+290. OpenEdge ABL
+291. OpenRC runscript
+292. OpenSCAD
+293. OpenType Feature File
+294. Org
+295. Ox
+296. Oxygene
+297. Oz
+298. P4
+299. PAWN
+300. PHP
+301. PLSQL
+302. PLpgSQL
+303. POV-Ray SDL
+304. Pan
+305. Papyrus
+306. Parrot
+307. Parrot Assembly
+308. Parrot Internal Representation
+309. Pascal
+310. Pep8
+311. Perl
+312. Perl 6
+313. Pic
+314. Pickle
+315. PicoLisp
+316. PigLatin
+317. Pike
+318. Pod
+319. PogoScript
+320. Pony
+321. PostCSS
+322. PostScript
+323. PowerBuilder
+324. PowerShell
+325. Processing
+326. Prolog
+327. Propeller Spin
+328. Protocol Buffer
+329. Public Key
+330. Pug
+331. Puppet
+332. Pure Data
+333. PureBasic
+334. PureScript
+335. Python
+336. Python console
+337. Python traceback
+338. QML
+339. QMake
+340. R
+341. RAML
+342. RDoc
+343. REALbasic
+344. REXX
+345. RHTML
+346. RMarkdown
+347. RPC
+348. RPM Spec
+349. RUNOFF
+350. Racket
+351. Ragel
+352. Rascal
+353. Raw token data
+354. Reason
+355. Rebol
+356. Red
+357. Redcode
+358. Regular Expression
+359. Ren'Py
+360. RenderScript
+361. Ring
+362. Riot
+363. RobotFramework
+364. Roff
+365. Rouge
+366. Ruby
+367. Rust
+368. SAS
+369. SCSS
+370. SMT
+371. SPARQL
+372. SQF
+373. SQL
+374. SQLPL
+375. SRecode Template
+376. STON
+377. SVG
+378. Sage
+379. SaltStack
+380. Sass
+381. Scala
+382. Scaml
+383. Scheme
+384. Scilab
+385. Self
+386. ShaderLab
+387. Shell
+388. ShellSession
+389. Shen
+390. Slash
+391. Slim
+392. Smali
+393. Smalltalk
+394. Smarty
+395. Solidity
+396. SourcePawn
+397. Spacebars
+398. Spline Font Database
+399. Squirrel
+400. Stan
+401. Standard ML
+402. Stata
+403. Stylus
+404. SubRip Text
+405. Sublime Text Config
+406. SugarSS
+407. SuperCollider
+408. Swift
+409. Swig
+410. SystemVerilog
+411. TI Program
+412. TLA
+413. TOML
+414. TXL
+415. Tcl
+416. Tcsh
+417. TeX
+418. Tea
+419. Terra
+420. Text
+421. Textile
+422. Thrift
+423. Titanium Style Sheets
+424. Turing
+425. Turtle
+426. Twig
+427. Type Language
+428. TypeScript
+429. Unified Parallel C
+430. Unity3D Asset
+431. Unix Assembly
+432. Uno
+433. UnrealScript
+434. UrWeb
+435. VCL
+436. VHDL
+437. Vala
+438. Verilog
+439. Vim script
+440. Visual Basic
+441. Visualforce
+442. Volt
+443. Vue
+444. Wavefront Material
+445. Wavefront Object
+446. Web Ontology Language
+447. WebAssembly
+448. WebIDL
+449. World of Warcraft Addon Data
+450. X10
+451. XC
+452. XCompose
+453. XML
+454. XPM
+455. XPages
+456. XProc
+457. XQuery
+458. XS
+459. XSLT
+460. XTemplate
+461. Xojo
+462. Xtend
+463. YAML
+464. YANG
+465. YARA
+466. Yacc
+467. Zephir
+468. Zimpl
+469. desktop
+470. eC
+471. edn
+472. fish
+473. mupad
+474. nesC
+475. ooc
+476. reStructuredText
+477. wdl
+478. wisp
+479. xBase
+",
+}
+`;

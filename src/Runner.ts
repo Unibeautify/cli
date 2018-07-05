@@ -1,12 +1,11 @@
 import * as program from "commander";
+import chalk from "chalk";
 
-import { setupUnibeautify } from "./index";
+import { getSupportedLanguages, setupUnibeautify } from "./index";
 import { BeautifyData } from "unibeautify";
 
 export class Runner {
-  constructor(private programArgs: IArgs) {}
-
-  public run() {
+  public beautify(programArgs: IArgs): Promise<void> {
     const {
       // args: files,
       language,
@@ -15,7 +14,7 @@ export class Runner {
       // configFile,
       configJson,
       filePath,
-    } = this.programArgs;
+    } = programArgs;
     return setupUnibeautify().then(unibeautify => {
       if (!language) {
         this.writeError("A language is required.");
@@ -46,6 +45,28 @@ export class Runner {
         });
       }
     });
+  }
+
+  public support(options: { json?: boolean; languages?: boolean }): void {
+    const printer: (info: SupportInfo) => void = options.json
+      ? this.jsonPrinter
+      : this.listPrinter;
+    const info: SupportInfo = {};
+    if (options.languages) {
+      info["languages"] = getSupportedLanguages();
+    }
+    // if (cmd.beautifiers) {
+    //   console.log("Coming soon!");
+    //   info["beautifiers"] = [];
+    // }
+    if (Object.keys(info).length === 0) {
+      // tslint:disable-next-line:no-console
+      this.writeError("Required option --languages is missing.");
+      this.exit(1);
+    } else {
+      printer(info);
+      this.exit(0);
+    }
   }
 
   private parseConfig(configJson?: string): object {
@@ -84,6 +105,18 @@ export class Runner {
     });
   }
 
+  private jsonPrinter = (info: SupportInfo) => {
+    this.writeOut(JSON.stringify(info, null, 2));
+  };
+
+  private listPrinter = (info: SupportInfo) => {
+    Object.keys(info).forEach(section => {
+      this.writeOut(chalk.blue(`Supported ${section}\n`));
+      const items = info[section];
+      items.forEach((item, index) => this.writeOut(`${index + 1}. ${item}\n`));
+    });
+  };
+
   protected writeOut(text: string): void {
     process.stdout.write(text);
   }
@@ -108,4 +141,8 @@ export interface IArgs extends program.Command {
   configFile?: string;
   configJson?: string;
   filePath?: string;
+}
+
+interface SupportInfo {
+  [section: string]: string[];
 }

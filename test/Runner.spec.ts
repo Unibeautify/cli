@@ -17,8 +17,34 @@ describe("Runner", () => {
     protected exit(exitCode: number) {
       this.exitCode = exitCode;
     }
+    public toJSON(): object {
+      return {
+        exitCode: this.exitCode,
+        stderr: this.stderr,
+        stdout: this.stdout,
+      };
+    }
   }
-  test("sanity", () => {
-    expect(true).toBe(true);
+  describe("Support", () => {
+    describe("with JSON", () => {
+      test("languages", () => {
+        const runner = new CustomRunner();
+        runner.support({
+          json: true,
+          languages: true,
+        });
+        expect(runner.toJSON()).toMatchSnapshot();
+      });
+    });
+    describe("without JSON", () => {
+      test("languages", () => {
+        const runner = new CustomRunner();
+        runner.support({
+          json: false,
+          languages: true,
+        });
+        expect(runner.toJSON()).toMatchSnapshot();
+      });
+    });
   });
 });
