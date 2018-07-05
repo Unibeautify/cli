@@ -107,6 +107,7 @@ export class Runner {
 
   private jsonPrinter = (info: SupportInfo) => {
     this.writeOut(JSON.stringify(info, null, 2));
+    // unibeautify:ignore-next-line
   }
 
   private listPrinter = (info: SupportInfo) => {
@@ -115,6 +116,7 @@ export class Runner {
       const items = info[section];
       items.forEach((item, index) => this.writeOut(`${index + 1}. ${item}\n`));
     });
+    // unibeautify:ignore-next-line
   }
 
   protected writeOut(text: string): void {
