@@ -4,11 +4,13 @@
  * Module dependencies.
  */
 import * as program from "commander";
-import { setupUnibeautify } from "./index";
+import chalk from "chalk";
+import { setupUnibeautify, findInstalledBeautifiers, getSupportedLanguages } from "./index";
 const pkg = require("../package.json");
 
 program
   .version(pkg.version)
+  .command("beautify", "Beautify files", {isDefault: true})
   .usage("[options] [files...]")
   .option("-l, --language <language>", "Language of file to beautify")
   // .option("-i, --input-file [file]", "Input file to be beautified")
@@ -20,6 +22,28 @@ program
   // .option("-b, --beautifiers [beautifier...]", "Installed Beautifiers to load")
   // .option("--input-dir [directory]", "Input directory of files to be beautified")
   // .option("--output-dir [directory]", "Output directory of beautified results")
+  ;
+
+program
+  .command("list [options]", "List languages available or beautifiers installed")
+  .alias("ls")
+  .option("-l, --languages", "List available languages")
+  .option("-b, --beautifiers", "List beautifiers installed")
+  .action((items, cmd) => {
+    if (cmd.languages) {
+      console.log(chalk.blue("Supported languages\n"));
+      getSupportedLanguages().forEach(language => {
+        console.log(`- ${language}`);
+      });
+      process.exit(0);
+    } else if (cmd.beautifiers) {
+      console.log("Coming soon!");
+      process.exit(0);
+    } else {
+      console.error("Unrecognized option");
+      process.exit(1);
+    }
+  })
   ;
 
 /**
@@ -35,8 +59,7 @@ interface IArgs extends program.Command {
   filePath?: string;
 }
 
-const programArgs: IArgs = program.parse(process.argv);
-
+const programArgs = program.parse(process.argv);
 const {
   args: files,
   language,
@@ -49,7 +72,6 @@ const {
 
 setupUnibeautify()
 .then((unibeautify) => {
-
   if (!language) {
     console.error("A language is required.");
     return process.exit(1);
@@ -98,4 +120,3 @@ setupUnibeautify()
   }
 
 });
-

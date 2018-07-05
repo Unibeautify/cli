@@ -57,3 +57,11 @@ export function loadInstalledBeautifiers(): Promise<Unibeautify> {
 export function setupUnibeautify(): Promise<Unibeautify> {
   return loadInstalledBeautifiers();
 }
+
+// TODO filter languages based on beautifiers that are installed
+export function getSupportedLanguages(): string[] {
+  const languages = unibeautify.getLoadedLanguages();
+  return languages.map(language => {
+    return language.name;
+  });
+}

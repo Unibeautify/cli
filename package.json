@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "@types/node": "^10.5.1",
+    "chalk": "^2.4.1",
     "commander": "^2.15.1",
     "cross-spawn": "^6.0.5",
     "find-global-packages": "0.0.1",
