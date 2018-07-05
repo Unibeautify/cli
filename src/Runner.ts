@@ -107,7 +107,7 @@ export class Runner {
 
   private jsonPrinter = (info: SupportInfo) => {
     this.writeOut(JSON.stringify(info, null, 2));
-  };
+  }
 
   private listPrinter = (info: SupportInfo) => {
     Object.keys(info).forEach(section => {
@@ -115,7 +115,7 @@ export class Runner {
       const items = info[section];
       items.forEach((item, index) => this.writeOut(`${index + 1}. ${item}\n`));
     });
-  };
+  }
 
   protected writeOut(text: string): void {
     process.stdout.write(text);
