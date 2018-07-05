@@ -1,5 +1,6 @@
 {
     "rules": {
+        "no-console": true,
         "class-name": true,
         "comment-format": [
             true,
