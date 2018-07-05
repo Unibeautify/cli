@@ -8,10 +8,9 @@ os:
 cache:
   directories:
   - node_modules # NPM packages
-  - typings # TypeScript Typings
 script:
   - npm run lint
-  # - npm test
+  - npm test
 notifications:
   email:
     on_success: never
