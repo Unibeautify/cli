@@ -33,7 +33,7 @@ program
   .command("support", "List supported languages and/or beautifiers installed")
   .alias("list")
   .alias("ls")
-  .option("-l, --languages", "List available languages")
+  .option("-a, --languages", "List available languages")
   //   .option("-b, --beautifiers", "List beautifiers installed")
   .option("-j, --json", "List as JSON array.")
   .action((items, cmd) => {

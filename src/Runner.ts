@@ -47,7 +47,7 @@ export class Runner {
     });
   }
 
-  public support(options: { json?: boolean; languages?: boolean }): void {
+  public async support(options: { json?: boolean; languages?: boolean; beautifiers?: boolean }): Promise<void> {
     const printer: (info: SupportInfo) => void = options.json
       ? this.jsonPrinter
       : this.listPrinter;
@@ -55,13 +55,13 @@ export class Runner {
     if (options.languages) {
       info["languages"] = getSupportedLanguages();
     }
-    // if (cmd.beautifiers) {
-    //   console.log("Coming soon!");
-    //   info["beautifiers"] = [];
-    // }
+    if (options.beautifiers) {
+      this.writeOut("Coming soon!");
+      this.exit(0);
+      // info["beautifiers"] = [];
+    }
     if (Object.keys(info).length === 0) {
-      // tslint:disable-next-line:no-console
-      this.writeError("Required option --languages is missing.");
+      this.writeError("Nothing to show");
       this.exit(1);
     } else {
       printer(info);
@@ -112,19 +112,19 @@ export class Runner {
 
   private listPrinter = (info: SupportInfo) => {
     Object.keys(info).forEach(section => {
-      this.writeOut(chalk.blue(`Supported ${section}\n`));
+      this.writeOut(chalk.blue(`Supported ${section}`));
       const items = info[section];
-      items.forEach((item, index) => this.writeOut(`${index + 1}. ${item}\n`));
+      items.forEach((item, index) => this.writeOut(`${index + 1}. ${item}`));
     });
     // unibeautify:ignore-next-line
   }
 
   protected writeOut(text: string): void {
-    process.stdout.write(text);
+    process.stdout.write(text + "\n");
   }
 
   protected writeError(text: string): void {
-    process.stderr.write(text);
+    process.stderr.write(text + "\n");
   }
 
   protected exit(exitCode: number): void {
