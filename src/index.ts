@@ -62,3 +62,9 @@ export function getSupportedLanguages(): string[] {
     return language.name;
   });
 }
+
+export function getAllLanguages(): string[] {
+  return unibeautify.getLoadedLanguages().map(language => {
+    return language.name;
+  });
+}

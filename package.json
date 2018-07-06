@@ -9,7 +9,7 @@
   "scripts": {
     "compile": "tsc",
     "clean": "rimraf dist",
-    "jest": "jest",
+    "jest": "jest --detectOpenHandles",
     "test": "npm-run-all build jest",
     "docs": "typedoc --out docs --includeDeclarations",
     "prepare": "npm run build",
@@ -59,7 +59,6 @@
   "dependencies": {
     "@types/node": "^10.5.1",
     "chalk": "^2.4.1",
-    "commander": "^2.15.1",
     "cross-spawn": "^6.0.5",
     "find-global-packages": "0.0.1",
     "requireg": "^0.1.8",

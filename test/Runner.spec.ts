@@ -30,6 +30,7 @@ describe("Runner", () => {
       test("languages", () => {
         const runner = new CustomRunner();
         runner.support({
+          all: true,
           json: true,
           languages: true,
         });
@@ -40,6 +41,7 @@ describe("Runner", () => {
       test("languages", () => {
         const runner = new CustomRunner();
         runner.support({
+          all: true,
           json: false,
           languages: true,
         });

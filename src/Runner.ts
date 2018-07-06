@@ -1,7 +1,7 @@
 // import * as program from "yargs";
 import chalk from "chalk";
 
-import { getSupportedLanguages, findInstalledBeautifiers, setupUnibeautify } from "./index";
+import { getSupportedLanguages, findInstalledBeautifiers, setupUnibeautify, getAllLanguages } from "./index";
 import { BeautifyData } from "unibeautify";
 
 export class Runner {
@@ -47,21 +47,22 @@ export class Runner {
     });
   }
 
-  public async support(options: { json?: boolean; languages?: boolean; beautifiers?: boolean }): Promise<void> {
+  public support(options: { json?: boolean; languages?: boolean; beautifiers?: boolean; all?: boolean }): Promise<void> {
     const printer: (info: SupportInfo) => void = options.json
       ? this.jsonPrinter
       : this.listPrinter;
     const info: SupportInfo = {};
     return setupUnibeautify().then(async unibeautify => {
       if (options.languages) {
-        info["languages"] = getSupportedLanguages();
+        if (options.all) {
+          info["languages"] = getAllLanguages();
+        } else {
+          info["languages"] = getSupportedLanguages();
+        }
       }
       if (options.beautifiers) {
         const beautifiers = await findInstalledBeautifiers();
         info["beautifiers"] = beautifiers;
-        // .then(beautifiers => {
-        //   info["beautifiers"] = beautifiers;
-        // });
       }
       if (Object.keys(info).length === 0) {
         this.writeError("Nothing to show");

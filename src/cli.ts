@@ -58,6 +58,12 @@ program
   .command({
     aliases: ["list", "ls"],
     builder: {
+      all: {
+        alias: "a",
+        default: false,
+        demandOption: false,
+        describe: "List all languages supported",
+      },
       beautifiers: {
         alias: "b",
         default: false,
@@ -74,11 +80,11 @@ program
         alias: "l",
         default: false,
         demandOption: false,
-        describe: "List supported languages",
+        describe: "List supported languages based on installed beautifiers",
       },
     },
     command: "support",
-    describe: "List stuff",
+    describe: "List languages and beautifiers",
     handler: (argv) => {
       const main = new Runner();
       main.support(argv);
