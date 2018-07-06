@@ -5,7 +5,7 @@ import {
   getSupportedLanguages,
   findInstalledBeautifiers,
   setupUnibeautify,
-  getAllLanguages
+  getAllLanguages,
 } from "./index";
 import { BeautifyData } from "unibeautify";
 

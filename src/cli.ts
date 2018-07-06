@@ -92,7 +92,6 @@ program
   })
   .help().argv;
 
-
 // .option("-i, --input-file [file]", "Input file to be beautified")
 // .option("-b, --beautifiers [beautifier...]", "Installed Beautifiers to load")
 // .option("--input-dir [directory]", "Input directory of files to be beautified")
