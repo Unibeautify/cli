@@ -50,10 +50,10 @@ program
     },
     command: "*",
     describe: "Beautify Files",
-    handler: (argv) => {
+    handler: argv => {
       const main = new Runner();
       main.beautify(argv);
-    }
+    },
   })
   .command({
     aliases: ["list", "ls"],
@@ -85,19 +85,18 @@ program
     },
     command: "support",
     describe: "List languages and beautifiers",
-    handler: (argv) => {
+    handler: argv => {
       const main = new Runner();
       main.support(argv);
-    }
+    },
   })
-  .help()
-  .argv;
+  .help().argv;
 
 
-  // .option("-i, --input-file [file]", "Input file to be beautified")
-  // .option("-b, --beautifiers [beautifier...]", "Installed Beautifiers to load")
-  // .option("--input-dir [directory]", "Input directory of files to be beautified")
-  // .option("--output-dir [directory]", "Output directory of beautified results")
+// .option("-i, --input-file [file]", "Input file to be beautified")
+// .option("-b, --beautifiers [beautifier...]", "Installed Beautifiers to load")
+// .option("--input-dir [directory]", "Input directory of files to be beautified")
+// .option("--output-dir [directory]", "Output directory of beautified results")
 
 // const programArgs: IArgs = program.parse(process.argv);
 // const main = new Runner();

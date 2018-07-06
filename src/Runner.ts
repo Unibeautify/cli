@@ -1,7 +1,12 @@
 // import * as program from "yargs";
 import chalk from "chalk";
 
-import { getSupportedLanguages, findInstalledBeautifiers, setupUnibeautify, getAllLanguages } from "./index";
+import {
+  getSupportedLanguages,
+  findInstalledBeautifiers,
+  setupUnibeautify,
+  getAllLanguages
+} from "./index";
 import { BeautifyData } from "unibeautify";
 
 export class Runner {
@@ -47,7 +52,12 @@ export class Runner {
     });
   }
 
-  public support(options: { json?: boolean; languages?: boolean; beautifiers?: boolean; all?: boolean }): Promise<void> {
+  public support(options: {
+    json?: boolean;
+    languages?: boolean;
+    beautifiers?: boolean;
+    all?: boolean;
+  }): Promise<void> {
     const printer: (info: SupportInfo) => void = options.json
       ? this.jsonPrinter
       : this.listPrinter;
