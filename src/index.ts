@@ -8,16 +8,16 @@ Find all globally installed beautifiers.
 export function findInstalledBeautifiers(): Promise<string[]> {
   return new Promise((resolve, reject) => {
     gSearch()
-    .then((globalPackages: GlobalSearchResult[]) => {
-      const packageNames = globalPackages.map(pkg => pkg.name);
-      const beautifierNames = packageNames.filter(pkg => {
-        return /beautifier-.*/.test(pkg);
+      .then((globalPackages: GlobalSearchResult[]) => {
+        const packageNames = globalPackages.map(pkg => pkg.name);
+        const beautifierNames = packageNames.filter(pkg => {
+          return /beautifier-.*/.test(pkg);
+        });
+        return resolve(beautifierNames);
+      })
+      .catch((error: Error) => {
+        return reject(error);
       });
-      return resolve(beautifierNames);
-    })
-    .catch((error: Error) => {
-      return reject(error);
-    });
   });
 }
 
