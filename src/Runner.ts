@@ -1,4 +1,3 @@
-// import * as program from "yargs";
 import chalk from "chalk";
 
 import {

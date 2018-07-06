@@ -96,7 +96,3 @@ program
 // .option("-b, --beautifiers [beautifier...]", "Installed Beautifiers to load")
 // .option("--input-dir [directory]", "Input directory of files to be beautified")
 // .option("--output-dir [directory]", "Output directory of beautified results")
-
-// const programArgs: IArgs = program.parse(process.argv);
-// const main = new Runner();
-// main.beautify(programArgs);

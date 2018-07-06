@@ -1,41 +1,22 @@
 import unibeautify, { Unibeautify } from "unibeautify";
 const requireg = require("requireg");
-import { spawn } from "child_process";
+const gSearch = require("g-search");
 
 /**
 Find all globally installed beautifiers.
 */
 export function findInstalledBeautifiers(): Promise<string[]> {
   return new Promise((resolve, reject) => {
-    runSpawn("npm", ["ls", "-g", "--depth=0", "--json"]).then(
-      globalPackages => {
-        const packageJSON = JSON.parse(globalPackages).dependencies;
-        const packageNames = Object.keys(packageJSON);
-        const beautifierNames = packageNames.filter((name: string) => {
-          return /beautifier-.*/.test(name);
-        });
-        return resolve(beautifierNames);
-      }
-    );
-  });
-}
-
-function runSpawn(exe: string, args: string[]): Promise<any> {
-  return new Promise((resolve, reject) => {
-    const ls = spawn(exe, args);
-    let stdout = "";
-    ls.stdout.on("data", data => {
-      return (stdout += data);
-    });
-    // ls.stderr.on("data", (data) => {
-    //   console.log(`stderr: ${data}`);
-    // });
-    ls.on("close", code => {
-      return resolve(stdout);
-    });
-    ls.on("error", err => {
-      // tslint:disable-next-line:no-console
-      console.error(err);
+    gSearch()
+    .then((globalPackages: GlobalSearchResult[]) => {
+      const packageNames = globalPackages.map(pkg => pkg.name);
+      const beautifierNames = packageNames.filter(pkg => {
+        return /beautifier-.*/.test(pkg);
+      });
+      return resolve(beautifierNames);
+    })
+    .catch((error: Error) => {
+      return reject(error);
     });
   });
 }
@@ -67,4 +48,10 @@ export function getAllLanguages(): string[] {
   return unibeautify.getLoadedLanguages().map(language => {
     return language.name;
   });
+}
+
+export interface GlobalSearchResult {
+  name: string;
+  version: string;
+  location: string;
 }
