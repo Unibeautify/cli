@@ -47,20 +47,21 @@ export class Runner {
     });
   }
 
-  public support(options: { json?: boolean; languages?: boolean; beautifiers?: boolean }): Promise<void> {
+  public async support(options: { json?: boolean; languages?: boolean; beautifiers?: boolean }): Promise<void> {
     const printer: (info: SupportInfo) => void = options.json
       ? this.jsonPrinter
       : this.listPrinter;
     const info: SupportInfo = {};
-    return setupUnibeautify().then(unibeautify => {
+    return setupUnibeautify().then(async unibeautify => {
       if (options.languages) {
         info["languages"] = getSupportedLanguages();
       }
       if (options.beautifiers) {
-        findInstalledBeautifiers()
-        .then(beautifiers => {
-          info["beautifiers"] = beautifiers;
-        });
+        const beautifiers = await findInstalledBeautifiers();
+        info["beautifiers"] = beautifiers;
+        // .then(beautifiers => {
+        //   info["beautifiers"] = beautifiers;
+        // });
       }
       if (Object.keys(info).length === 0) {
         this.writeError("Nothing to show");
