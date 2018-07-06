@@ -4,15 +4,15 @@ describe("Runner", () => {
   class CustomRunner extends Runner {
     public stdout: string = "";
     public stderr: string = "";
-    public exitCode: number;
+    public exitCode: number = 0;
     protected readFromStdin() {
       return Promise.resolve("");
     }
     protected writeOut(text: string) {
-      this.stdout += text;
+      this.stdout += text + "\n";
     }
     protected writeError(text: string) {
-      this.stderr += text;
+      this.stderr += text + "\n";
     }
     protected exit(exitCode: number) {
       this.exitCode = exitCode;
@@ -26,10 +26,10 @@ describe("Runner", () => {
     }
   }
   describe("Support", () => {
-    describe("with JSON", () => {
-      test("languages", () => {
+    describe("with JSON", async () => {
+      test("languages", async () => {
         const runner = new CustomRunner();
-        runner.support({
+        await runner.support({
           all: true,
           json: true,
           languages: true,
@@ -37,10 +37,11 @@ describe("Runner", () => {
         expect(runner.toJSON()).toMatchSnapshot();
       });
     });
-    describe("without JSON", () => {
-      test("languages", () => {
+    jest.setTimeout(20000);
+    describe("without JSON", async () => {
+      test("languages", async () => {
         const runner = new CustomRunner();
-        runner.support({
+        await runner.support({
           all: true,
           json: false,
           languages: true,

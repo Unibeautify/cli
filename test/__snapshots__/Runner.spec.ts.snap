@@ -486,7 +486,8 @@ Object {
     \\"wisp\\",
     \\"xBase\\"
   ]
-}",
+}
+",
 }
 `;
 
@@ -495,7 +496,7 @@ Object {
   "exitCode": 0,
   "stderr": "",
   "stdout": "[34mSupported languages[39m
-[34m[39m1. 1C Enterprise
+1. 1C Enterprise
 2. ABAP
 3. ABNF
 4. AGS Script

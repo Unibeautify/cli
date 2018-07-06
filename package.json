@@ -9,7 +9,7 @@
   "scripts": {
     "compile": "tsc",
     "clean": "rimraf dist",
-    "jest": "jest --detectOpenHandles",
+    "jest": "jest",
     "test": "npm-run-all build jest",
     "docs": "typedoc --out docs --includeDeclarations",
     "prepare": "npm run build",
