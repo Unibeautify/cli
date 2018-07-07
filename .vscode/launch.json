@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug All Tests",
+            "runtimeVersion": "9.10.1",
+            "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+            "args": [
+                "--config", "jest.config.js", "--runInBand", "--coverage", "false"
+            ],
+            "runtimeArgs": ["--nolazy"],
+            "console": "internalConsole",
+            "env": {
+                "NODE_ENV": "test"
+            },
+            "protocol": "inspector",
+            "sourceMaps": true,
+            "outFiles": ["${workspaceRoot}/dist/"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Current Tests File",
+            "runtimeVersion": "9.10.1",
+            "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+            "args": [
+                "--config",
+                "jest.config.js",
+                "--runInBand",
+                "--coverage",
+                "false",
+                "${fileBasename}"
+            ],
+            "runtimeArgs": ["--nolazy"],
+            "console": "internalConsole",
+            "env": {
+                "NODE_ENV": "test"
+            },
+            "protocol": "inspector",
+            "sourceMaps": true,
+            "outFiles": ["${workspaceRoot}/dist/"]
+        }
+    ]
+}
