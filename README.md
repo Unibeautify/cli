@@ -7,7 +7,7 @@
 ## Installation
 
 ```bash
-$ npm install --global unibeautify-cli
+$ npm install --global @unibeautify/cli
 ```
 
 ## Usage
