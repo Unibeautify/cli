@@ -1,5 +1,5 @@
 {
-  "name": "unibeautify-cli",
+  "name": "@unibeautify/cli",
   "version": "0.2.1",
   "description": "CLI for Unibeautify",
   "main": "dist/index.js",

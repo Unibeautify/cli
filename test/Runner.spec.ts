@@ -37,7 +37,6 @@ describe("Runner", () => {
         expect(runner.toJSON()).toMatchSnapshot();
       });
     });
-    jest.setTimeout(20000);
     describe("without JSON", async () => {
       test("languages", async () => {
         const runner = new CustomRunner();
