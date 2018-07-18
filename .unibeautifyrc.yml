@@ -1,6 +1,6 @@
 ---
-TypeScript:
-  beautifiers: ["Prettier"]
+JavaScript:
+  beautifiers: ["ESLint"]
   align_assignments: false
   arrow_parens: "as-needed"
   break_chained_methods: true

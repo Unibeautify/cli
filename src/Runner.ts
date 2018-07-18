@@ -7,24 +7,31 @@ import {
   getAllLanguages,
 } from "./index";
 import { BeautifyData } from "unibeautify";
+import * as cosmiconfig from "cosmiconfig";
 
 export class Runner {
+  // tslint:disable
   public beautify(programArgs: IArgs): Promise<void> {
     const {
       // args: files,
       language,
       // outFile,
       // replace,
-      // configFile,
+      configFile,
       configJson,
       filePath,
     } = programArgs;
-    return setupUnibeautify().then(unibeautify => {
+    return setupUnibeautify().then(async unibeautify => {
       if (!language) {
         this.writeError("A language is required.");
         return this.exit(1);
       }
-      const config = this.parseConfig(configJson);
+      let config: any;
+      if (configJson) {
+        config = this.parseConfig(configJson);
+      } else {
+        config = await this.configFile(configFile);
+      }
       if (this.isTerminal) {
         this.writeError("Beautify files is not yet supported.");
         return this.exit(1);
@@ -94,6 +101,24 @@ export class Runner {
       }
     }
     return config;
+  }
+
+  private configFile(configFile?: string, filePath?: string) {
+    const configExplorer = cosmiconfig("unibeautify", {});
+    if (configFile) {
+      return configExplorer
+        .load(configFile)
+        .then(result => (result ? result.config : null))
+        .catch(error => {
+          Promise.reject(error);
+        });
+    }
+    return configExplorer
+    .search(filePath)
+    .then(result => (result ? result.config : null))
+    .catch(error => {
+      Promise.reject(error);
+    });
   }
 
   protected get isTerminal(): boolean {
