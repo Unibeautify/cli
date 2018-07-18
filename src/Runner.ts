@@ -40,7 +40,7 @@ export class Runner {
           const data: BeautifyData = {
             filePath: filePath,
             languageName: language,
-            options: config as any || {},
+            options: (config as any) || {},
             text,
           };
           return unibeautify
@@ -114,11 +114,11 @@ export class Runner {
         });
     }
     return configExplorer
-    .search(filePath)
-    .then(result => (result ? result.config : null))
-    .catch(error => {
-      Promise.reject(error);
-    });
+      .search(filePath)
+      .then(result => (result ? result.config : null))
+      .catch(error => {
+        Promise.reject(error);
+      });
   }
 
   protected get isTerminal(): boolean {
