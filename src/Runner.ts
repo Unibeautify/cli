@@ -40,7 +40,7 @@ export class Runner {
           const data: BeautifyData = {
             filePath: filePath,
             languageName: language,
-            options: config as any,
+            options: config as any || {},
             text,
           };
           return unibeautify
