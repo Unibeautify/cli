@@ -1,5 +1,5 @@
 ---
-JavaScript:
+TypeScript:
   beautifiers: ["ESLint"]
   align_assignments: false
   arrow_parens: "as-needed"
