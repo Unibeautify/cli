@@ -10,7 +10,6 @@ import { BeautifyData } from "unibeautify";
 import * as cosmiconfig from "cosmiconfig";
 
 export class Runner {
-  // tslint:disable
   public beautify(programArgs: IArgs): Promise<void> {
     const {
       // args: files,
