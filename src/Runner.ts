@@ -8,6 +8,7 @@ import {
 } from "./index";
 import { BeautifyData } from "unibeautify";
 import * as cosmiconfig from "cosmiconfig";
+import * as fs from "fs";
 
 export class Runner {
   public beautify(programArgs: IArgs): Promise<void> {
@@ -31,29 +32,28 @@ export class Runner {
       } else {
         config = await this.configFile(configFile);
       }
-      if (this.isTerminal) {
-        this.writeError("Beautify files is not yet supported.");
-        return this.exit(1);
+      let text = "";
+      if (this.isTerminal && filePath) {
+        text = await this.readFile(filePath);
       } else {
-        return this.readFromStdin().then(text => {
-          const data: BeautifyData = {
-            filePath: filePath,
-            languageName: language,
-            options: (config as any) || {},
-            text,
-          };
-          return unibeautify
-            .beautify(data)
-            .then((result: string) => {
-              this.writeOut(result);
-              return this.exit(0);
-            })
-            .catch((error: Error) => {
-              this.writeError(error.message);
-              return this.exit(1);
-            });
-        });
+        text = await this.readFromStdin();
       }
+      const data: BeautifyData = {
+        filePath: filePath,
+        languageName: language,
+        options: (config as any) || {},
+        text,
+      };
+      return unibeautify
+        .beautify(data)
+        .then((result: string) => {
+          this.writeOut(result);
+          return this.exit(0);
+        })
+        .catch((error: Error) => {
+          this.writeError(error.message);
+          return this.exit(1);
+        });
     });
   }
 
@@ -96,7 +96,7 @@ export class Runner {
         config = JSON.parse(configJson);
       } catch (e) {
         this.writeError(e.message);
-        this.exit(1);
+        this.exit(2);
       }
     }
     return config;
@@ -167,6 +167,17 @@ export class Runner {
 
   protected exit(exitCode: number): void {
     process.exit(exitCode);
+  }
+
+  private readFile(filePath: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      fs.readFile(filePath, (error, data) => {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(data.toString());
+      });
+    });
   }
 }
 

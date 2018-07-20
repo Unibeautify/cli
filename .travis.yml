@@ -9,6 +9,7 @@ cache:
   directories:
   - node_modules # NPM packages
 script:
+  - npm install -g unibeautify @unibeautify/beautifier-eslint eslint@4
   - npm run lint
   - npm run build
   - npm test

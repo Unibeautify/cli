@@ -47,6 +47,37 @@ describe("Runner", () => {
         });
         expect(runner.toJSON()).toMatchSnapshot();
       });
+      test("supported languages", async () => {
+        const runner = new CustomRunner();
+        await runner.support({
+          all: false,
+          json: false,
+          languages: true,
+        });
+        expect(runner.toJSON()).toMatchSnapshot();
+      });
+    });
+    test("error", async () => {
+      const runner = new CustomRunner();
+      await runner.support({
+        all: false,
+        beautifiers: false,
+        json: false,
+        languages: false,
+      });
+      expect(runner.toJSON()).toMatchSnapshot();
+    });
+  });
+  describe("Beautify", () => {
+    test("options in cmd", async () => {
+      const runner = new CustomRunner();
+      await runner.beautify({
+        args: [],
+        configJson: `{"JavaScript": {"beautifiers": ["ESLint"],"quotes": "double"}}`,
+        filePath: "test/test.js",
+        language: "JavaScript",
+      });
+      expect(runner.toJSON()).toMatchSnapshot();
     });
   });
 });
