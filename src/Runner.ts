@@ -7,6 +7,8 @@ import {
   getAllLanguages,
 } from "./index";
 import { BeautifyData } from "unibeautify";
+import * as cosmiconfig from "cosmiconfig";
+import * as fs from "fs";
 
 export class Runner {
   public beautify(programArgs: IArgs): Promise<void> {
@@ -15,39 +17,43 @@ export class Runner {
       language,
       // outFile,
       // replace,
-      // configFile,
+      configFile,
       configJson,
       filePath,
     } = programArgs;
-    return setupUnibeautify().then(unibeautify => {
+    return setupUnibeautify().then(async unibeautify => {
       if (!language) {
         this.writeError("A language is required.");
         return this.exit(1);
       }
-      const config = this.parseConfig(configJson);
-      if (this.isTerminal) {
-        this.writeError("Beautify files is not yet supported.");
-        return this.exit(1);
+      let config: any;
+      if (configJson) {
+        config = this.parseConfig(configJson);
       } else {
-        return this.readFromStdin().then(text => {
-          const data: BeautifyData = {
-            filePath: filePath,
-            languageName: language,
-            options: config as any,
-            text,
-          };
-          return unibeautify
-            .beautify(data)
-            .then((result: string) => {
-              this.writeOut(result);
-              return this.exit(0);
-            })
-            .catch((error: Error) => {
-              this.writeError(error.message);
-              return this.exit(1);
-            });
-        });
+        config = await this.configFile(configFile);
       }
+      let text = "";
+      if (this.isTerminal && filePath) {
+        text = await this.readFile(filePath);
+      } else {
+        text = await this.readFromStdin();
+      }
+      const data: BeautifyData = {
+        filePath: filePath,
+        languageName: language,
+        options: (config as any) || {},
+        text,
+      };
+      return unibeautify
+        .beautify(data)
+        .then((result: string) => {
+          this.writeOut(result);
+          return this.exit(0);
+        })
+        .catch((error: Error) => {
+          this.writeError(error.message);
+          return this.exit(1);
+        });
     });
   }
 
@@ -90,10 +96,28 @@ export class Runner {
         config = JSON.parse(configJson);
       } catch (e) {
         this.writeError(e.message);
-        this.exit(1);
+        this.exit(2);
       }
     }
     return config;
+  }
+
+  private configFile(configFile?: string, filePath?: string) {
+    const configExplorer = cosmiconfig("unibeautify", {});
+    if (configFile) {
+      return configExplorer
+        .load(configFile)
+        .then(result => (result ? result.config : null))
+        .catch(error => {
+          Promise.reject(error);
+        });
+    }
+    return configExplorer
+      .search(filePath)
+      .then(result => (result ? result.config : null))
+      .catch(error => {
+        Promise.reject(error);
+      });
   }
 
   protected get isTerminal(): boolean {
@@ -143,6 +167,17 @@ export class Runner {
 
   protected exit(exitCode: number): void {
     process.exit(exitCode);
+  }
+
+  private readFile(filePath: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      fs.readFile(filePath, (error, data) => {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(data.toString());
+      });
+    });
   }
 }
 

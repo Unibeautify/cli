@@ -45,6 +45,7 @@
     "node": ">=6.0.0"
   },
   "devDependencies": {
+    "@types/cosmiconfig": "^5.0.3",
     "@types/jest": "23.3.0",
     "@types/yargs": "11.1.0",
     "jest": "23.4.1",
@@ -57,6 +58,7 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
+    "cosmiconfig": "^5.0.5",
     "g-search": "^0.3.0",
     "requireg": "^0.1.8",
     "unibeautify": "^0.15.0",

@@ -1,5 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Runner Beautify options in cmd 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "const test = \\"test\\";
+
+",
+}
+`;
+
+exports[`Runner Support error 1`] = `
+Object {
+  "exitCode": 1,
+  "stderr": "Nothing to show
+",
+  "stdout": "",
+}
+`;
+
 exports[`Runner Support with JSON languages 1`] = `
 Object {
   "exitCode": 0,
@@ -975,6 +994,16 @@ Object {
 477. wdl
 478. wisp
 479. xBase
+",
+}
+`;
+
+exports[`Runner Support without JSON supported languages 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "[34mSupported languages[39m
+1. JavaScript
 ",
 }
 `;
