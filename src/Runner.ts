@@ -11,14 +11,12 @@ import * as cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
 
 export class Runner {
+  protected stdout: NodeJS.WriteStream = process.stdout;
+  protected stderr: NodeJS.WriteStream = process.stderr;
+
   public beautify(programArgs: IArgs): Promise<void> {
     const {
-      // args: files,
       language,
-      // outFile,
-      // replace,
-      configFile,
-      configJson,
       filePath,
     } = programArgs;
     return setupUnibeautify().then(async unibeautify => {
@@ -26,18 +24,10 @@ export class Runner {
         this.writeError("A language is required.");
         return this.exit(1);
       }
-      let config: any;
-      if (configJson) {
-        config = this.parseConfig(configJson);
-      } else {
-        config = await this.configFile(configFile);
-      }
-      let text = "";
-      if (this.isTerminal && filePath) {
-        text = await this.readFile(filePath);
-      } else {
-        text = await this.readFromStdin();
-      }
+      const [config, text] = await Promise.all([
+        await this.readConfig(programArgs),
+        await this.readText(filePath),
+      ]);
       const data: BeautifyData = {
         filePath: filePath,
         languageName: language,
@@ -55,6 +45,26 @@ export class Runner {
           return this.exit(1);
         });
     });
+  }
+
+  private readConfig(programArgs: IArgs): Promise<any> | object {
+    const {
+      configFile,
+      configJson,
+    } = programArgs;
+    if (configJson) {
+      return Promise.resolve(this.parseConfig(configJson));
+    } else {
+      return this.configFile(configFile);
+    }
+  }
+
+  private async readText(filePath?: string): Promise<string> {
+    if (this.isTerminal && filePath) {
+      return await this.readFile(filePath);
+    } else {
+      return await this.readFromStdin();
+    }
   }
 
   public support(options: {
@@ -95,6 +105,7 @@ export class Runner {
       try {
         config = JSON.parse(configJson);
       } catch (e) {
+        // FIXME: I think this should return an error instead of stderr
         this.writeError(e.message);
         this.exit(2);
       }
@@ -109,14 +120,14 @@ export class Runner {
         .load(configFile)
         .then(result => (result ? result.config : null))
         .catch(error => {
-          Promise.reject(error);
+          Promise.reject(`Could not load configuration file ${configFile}`);
         });
     }
     return configExplorer
       .search(filePath)
       .then(result => (result ? result.config : null))
       .catch(error => {
-        Promise.reject(error);
+        Promise.reject(`Could not load configuration file ${configFile}`);
       });
   }
 
@@ -158,11 +169,11 @@ export class Runner {
   }
 
   protected writeOut(text: string): void {
-    process.stdout.write(text + "\n");
+    this.stdout.write(text + "\n");
   }
 
   protected writeError(text: string): void {
-    process.stderr.write(text + "\n");
+    this.stderr.write(text + "\n");
   }
 
   protected exit(exitCode: number): void {

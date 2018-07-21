@@ -10,6 +10,16 @@ Object {
 }
 `;
 
+exports[`Runner Beautify options in config file 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "const test = \\"test\\";
+
+",
+}
+`;
+
 exports[`Runner Support error 1`] = `
 Object {
   "exitCode": 1,
