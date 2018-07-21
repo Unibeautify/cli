@@ -103,18 +103,29 @@ describe("Runner", () => {
         });
       });
       test.only("should throw error when cannot find config", () => {
+        expect.assertions(5);
         const runner = new CustomRunner();
         const thenCb = jest.fn();
         const catchCb = jest.fn();
         const configFile = "test/.unibeautifyrc2.yml";
-          return runner.beautify({
-            args: [],
-            configFile,
-            filePath: "test/test.js",
-            language: "JavaScript",
-          }).then(thenCb, catchCb).then(() => {
+        return runner.beautify({
+          args: [],
+          configFile,
+          filePath: "test/test.js",
+          language: "JavaScript",
+        })
+          .then(() => {
+            [1,2,3,4,5,6,7,8,9,10].forEach(() => {
+              // tslint:disable-next-line:no-console
+              console.log("bad");
+            });
+            thenCb();
+          })
+          .catch(catchCb)
+          .then(() => {
+            // console.log("Did you even get here?", thenCb.mock);
             // tslint:disable-next-line:no-console
-            console.log("Did you even get here?", thenCb.mock);
+            console.log("Did you even get here?", catchCb.mock);
             expect(thenCb).not.toBeCalled();
             // tslint:disable-next-line:no-console
             console.log("here1?");
@@ -126,7 +137,7 @@ describe("Runner", () => {
             console.log("here3?");
             expect(catchCb.mock.calls[0]).toHaveLength(1);
             // tslint:disable-next-line:no-console
-            console.log("here4?");
+            console.log("here4?", catchCb.mock.calls);
             expect((<any>catchCb.mock.calls[0][0]).message).toBe(`Could not load configuration file ${configFile}`);
           });
       });

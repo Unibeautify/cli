@@ -15,43 +15,38 @@ export class Runner {
   protected stderr: NodeJS.WriteStream = process.stderr;
 
   public beautify(programArgs: IArgs): Promise<void> {
-    const {
-      language,
-      filePath,
-    } = programArgs;
-    return setupUnibeautify().then(async unibeautify => {
+    const { language, filePath } = programArgs;
+    return setupUnibeautify().then(unibeautify => {
       if (!language) {
         this.writeError("A language is required.");
         return this.exit(1);
       }
-      const [config, text] = await Promise.all([
-        await this.readConfig(programArgs),
-        await this.readText(filePath),
-      ]);
-      const data: BeautifyData = {
-        filePath: filePath,
-        languageName: language,
-        options: (config as any) || {},
-        text,
-      };
-      return unibeautify
-        .beautify(data)
-        .then((result: string) => {
-          this.writeOut(result);
-          return this.exit(0);
-        })
-        .catch((error: Error) => {
-          this.writeError(error.message);
-          return this.exit(1);
-        });
+      return Promise.all([
+        this.readConfig(programArgs),
+        this.readText(filePath),
+      ]).then(([config, text]) => {
+        const data: BeautifyData = {
+          filePath: filePath,
+          languageName: language,
+          options: (config as any) || {},
+          text,
+        };
+        return unibeautify
+          .beautify(data)
+          .then((result: string) => {
+            this.writeOut(result);
+            return this.exit(0);
+          })
+          .catch((error: Error) => {
+            this.writeError(error.message);
+            return this.exit(1);
+          });
+      });
     });
   }
 
-  private readConfig(programArgs: IArgs): Promise<any> | object {
-    const {
-      configFile,
-      configJson,
-    } = programArgs;
+  private readConfig(programArgs: IArgs): Promise<any> {
+    const { configFile, configJson } = programArgs;
     if (configJson) {
       return Promise.resolve(this.parseConfig(configJson));
     } else {
@@ -119,16 +114,16 @@ export class Runner {
       return configExplorer
         .load(configFile)
         .then(result => (result ? result.config : null))
-        .catch(error => {
-          Promise.reject(`Could not load configuration file ${configFile}`);
-        });
+        .catch(error =>
+          Promise.reject(new Error(`Could not load configuration file ${configFile}`))
+        );
     }
     return configExplorer
       .search(filePath)
       .then(result => (result ? result.config : null))
-      .catch(error => {
-        Promise.reject(`Could not load configuration file ${configFile}`);
-      });
+      .catch(error =>
+        Promise.reject(new Error(`Could not load configuration file ${configFile}`))
+      );
   }
 
   protected get isTerminal(): boolean {
