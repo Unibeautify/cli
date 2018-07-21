@@ -52,7 +52,7 @@ describe("Runner", () => {
         expect(runner.toJSON()).toMatchSnapshot();
       });
     });
-    test("error", async () => {
+    test("should exit with message 'nothing to show'", async () => {
       const runner = new CustomRunner();
       await runner.support({
         all: false,
@@ -102,7 +102,7 @@ describe("Runner", () => {
           expect((<any>catchCb.mock.calls[0][0]).message).toBe("ENOENT: no such file or directory, open 'test/test2.js'");
         });
       });
-      test.only("should throw error when cannot find config", () => {
+      test("should throw error when cannot find config", () => {
         expect.assertions(5);
         const runner = new CustomRunner();
         const thenCb = jest.fn();
@@ -114,32 +114,14 @@ describe("Runner", () => {
           filePath: "test/test.js",
           language: "JavaScript",
         })
-          .then(() => {
-            [1,2,3,4,5,6,7,8,9,10].forEach(() => {
-              // tslint:disable-next-line:no-console
-              console.log("bad");
-            });
-            thenCb();
-          })
-          .catch(catchCb)
-          .then(() => {
-            // console.log("Did you even get here?", thenCb.mock);
-            // tslint:disable-next-line:no-console
-            console.log("Did you even get here?", catchCb.mock);
-            expect(thenCb).not.toBeCalled();
-            // tslint:disable-next-line:no-console
-            console.log("here1?");
-            expect(catchCb).toHaveBeenCalled();
-            // tslint:disable-next-line:no-console
-            console.log("here2?");
-            expect(catchCb.mock.calls).toHaveLength(1);
-            // tslint:disable-next-line:no-console
-            console.log("here3?");
-            expect(catchCb.mock.calls[0]).toHaveLength(1);
-            // tslint:disable-next-line:no-console
-            console.log("here4?", catchCb.mock.calls);
-            expect((<any>catchCb.mock.calls[0][0]).message).toBe(`Could not load configuration file ${configFile}`);
-          });
+        .catch(catchCb)
+        .then(() => {
+          expect(thenCb).not.toBeCalled();
+          expect(catchCb).toHaveBeenCalled();
+          expect(catchCb.mock.calls).toHaveLength(1);
+          expect(catchCb.mock.calls[0]).toHaveLength(1);
+          expect((<any>catchCb.mock.calls[0][0]).message).toBe(`Could not load configuration file ${configFile}`);
+        });
       });
     });
   });

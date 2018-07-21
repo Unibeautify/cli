@@ -20,7 +20,7 @@ Object {
 }
 `;
 
-exports[`Runner Support error 1`] = `
+exports[`Runner Support should exit with message 'nothing to show' 1`] = `
 Object {
   "exitCode": 1,
   "stderr": "Nothing to show

@@ -1,3 +1,6 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=647b2686eea1455308f41e70e10aa991c0f8e4c39ee20495d0247e6bbc738aa5
 language: node_js
 node_js:
   - "8"
@@ -8,11 +11,23 @@ os:
 cache:
   directories:
   - node_modules # NPM packages
+before_script:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter;
+    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter;
+    else
+      echo Error:TRAVIS_OS_NAME && exit 1;
+    fi
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build  
 script:
   - npm install -g unibeautify @unibeautify/beautifier-eslint eslint@4
   - npm run lint
   - npm run build
   - npm test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT  
 notifications:
   email:
     on_success: never
