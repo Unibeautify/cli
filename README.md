@@ -1,6 +1,6 @@
 # Unibeautify-CLI
 
-[![Build Status](https://travis-ci.com/Unibeautify/unibeautify-cli.svg?branch=master)](https://travis-ci.com/Unibeautify/unibeautify-cli)
+[![Build Status](https://travis-ci.com/Unibeautify/unibeautify-cli.svg?branch=master)](https://travis-ci.com/Unibeautify/unibeautify-cli) [![Maintainability](https://api.codeclimate.com/v1/badges/8547ff73a2419bbabf92/maintainability)](https://codeclimate.com/github/Unibeautify/unibeautify-cli/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8547ff73a2419bbabf92/test_coverage)](https://codeclimate.com/github/Unibeautify/unibeautify-cli/test_coverage)
 
 > CLI for [Unibeautify](https://github.com/Unibeautify/unibeautify)
 
