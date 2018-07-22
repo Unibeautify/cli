@@ -1,6 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Runner Beautify options in cmd 1`] = `
+exports[`Runner Beautify Errors should throw an error saying language is required 1`] = `
+Object {
+  "exitCode": 1,
+  "stderr": "A language is required.
+",
+  "stdout": "",
+}
+`;
+
+exports[`Runner Beautify should beautify using options in config file 1`] = `
 Object {
   "exitCode": 0,
   "stderr": "",
@@ -10,7 +19,17 @@ Object {
 }
 `;
 
-exports[`Runner Support error 1`] = `
+exports[`Runner Beautify should beautify using options passed in cmd 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "const test = \\"test\\";
+
+",
+}
+`;
+
+exports[`Runner Support should exit with message 'nothing to show' 1`] = `
 Object {
   "exitCode": 1,
   "stderr": "Nothing to show
@@ -506,6 +525,16 @@ Object {
     \\"xBase\\"
   ]
 }
+",
+}
+`;
+
+exports[`Runner Support without JSON installed beautifiers 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "[34mSupported beautifiers[39m
+1. @unibeautify/beautifier-eslint
 ",
 }
 `;

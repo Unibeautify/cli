@@ -11,50 +11,55 @@ import * as cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
 
 export class Runner {
+  protected stdout: NodeJS.WriteStream = process.stdout;
+  protected stderr: NodeJS.WriteStream = process.stderr;
+
   public beautify(programArgs: IArgs): Promise<void> {
-    const {
-      // args: files,
-      language,
-      // outFile,
-      // replace,
-      configFile,
-      configJson,
-      filePath,
-    } = programArgs;
-    return setupUnibeautify().then(async unibeautify => {
+    const { language, filePath } = programArgs;
+    return setupUnibeautify().then(unibeautify => {
       if (!language) {
         this.writeError("A language is required.");
         return this.exit(1);
       }
-      let config: any;
-      if (configJson) {
-        config = this.parseConfig(configJson);
-      } else {
-        config = await this.configFile(configFile);
-      }
-      let text = "";
-      if (this.isTerminal && filePath) {
-        text = await this.readFile(filePath);
-      } else {
-        text = await this.readFromStdin();
-      }
-      const data: BeautifyData = {
-        filePath: filePath,
-        languageName: language,
-        options: (config as any) || {},
-        text,
-      };
-      return unibeautify
-        .beautify(data)
-        .then((result: string) => {
-          this.writeOut(result);
-          return this.exit(0);
-        })
-        .catch((error: Error) => {
-          this.writeError(error.message);
-          return this.exit(1);
-        });
+      return Promise.all([
+        this.readConfig(programArgs),
+        this.readText(filePath),
+      ]).then(([config, text]) => {
+        const data: BeautifyData = {
+          filePath: filePath,
+          languageName: language,
+          options: (config as any) || {},
+          text,
+        };
+        return unibeautify
+          .beautify(data)
+          .then((result: string) => {
+            this.writeOut(result);
+            return this.exit(0);
+          })
+          .catch((error: Error) => {
+            this.writeError(error.message);
+            return this.exit(1);
+          });
+      });
     });
+  }
+
+  private readConfig(programArgs: IArgs): Promise<any> {
+    const { configFile, configJson } = programArgs;
+    if (configJson) {
+      return Promise.resolve(this.parseConfig(configJson));
+    } else {
+      return this.configFile(configFile);
+    }
+  }
+
+  private async readText(filePath?: string): Promise<string> {
+    if (this.isTerminal && filePath) {
+      return this.readFile(filePath);
+    } else {
+      return this.readFromStdin();
+    }
   }
 
   public support(options: {
@@ -95,6 +100,7 @@ export class Runner {
       try {
         config = JSON.parse(configJson);
       } catch (e) {
+        // FIXME: I think this should return an error instead of stderr
         this.writeError(e.message);
         this.exit(2);
       }
@@ -104,20 +110,16 @@ export class Runner {
 
   private configFile(configFile?: string, filePath?: string) {
     const configExplorer = cosmiconfig("unibeautify", {});
-    if (configFile) {
-      return configExplorer
-        .load(configFile)
-        .then(result => (result ? result.config : null))
-        .catch(error => {
-          Promise.reject(error);
-        });
-    }
-    return configExplorer
-      .search(filePath)
+    const loadConfigPromise = configFile
+      ? configExplorer.load(configFile)
+      : configExplorer.search(filePath);
+    return loadConfigPromise
       .then(result => (result ? result.config : null))
-      .catch(error => {
-        Promise.reject(error);
-      });
+      .catch(error =>
+        Promise.reject(
+          new Error(`Could not load configuration file ${configFile}`)
+        )
+      );
   }
 
   protected get isTerminal(): boolean {
@@ -158,11 +160,11 @@ export class Runner {
   }
 
   protected writeOut(text: string): void {
-    process.stdout.write(text + "\n");
+    this.stdout.write(text + "\n");
   }
 
   protected writeError(text: string): void {
-    process.stderr.write(text + "\n");
+    this.stderr.write(text + "\n");
   }
 
   protected exit(exitCode: number): void {

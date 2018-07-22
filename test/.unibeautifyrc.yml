@@ -1,0 +1,4 @@
+---
+JavaScript:
+  beautifiers: ["ESLint"]
+  quotes: "double"
