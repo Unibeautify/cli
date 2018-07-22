@@ -113,7 +113,9 @@ export class Runner {
     const promise = configFile ? configExplorer.load(configFile) : configExplorer.search(filePath);
     return promise.then(result => (result ? result.config : null))
       .catch(error =>
-        Promise.reject(new Error(`Could not load configuration file ${configFile}`))
+        Promise.reject(
+          new Error(`Could not load configuration file ${configFile}`)
+        )
       );
   }
 

@@ -98,18 +98,23 @@ describe("Runner", () => {
         const runner = new CustomRunner();
         const thenCb = jest.fn();
         const catchCb = jest.fn();
-        return runner.beautify({
-          args: [],
-          configFile: "test/.unibeautifyrc.yml",
-          filePath: "test/test2.js",
-          language: "JavaScript",
-        }).then(thenCb, catchCb).then(() => {
-          expect(thenCb).not.toBeCalled();
-          expect(catchCb).toHaveBeenCalled();
-          expect(catchCb.mock.calls).toHaveLength(1);
-          expect(catchCb.mock.calls[0]).toHaveLength(1);
-          expect((<any>catchCb.mock.calls[0][0]).message).toBe("ENOENT: no such file or directory, open 'test/test2.js'");
-        });
+        return runner
+          .beautify({
+            args: [],
+            configFile: "test/.unibeautifyrc.yml",
+            filePath: "test/test2.js",
+            language: "JavaScript",
+          })
+          .then(thenCb, catchCb)
+          .then(() => {
+            expect(thenCb).not.toBeCalled();
+            expect(catchCb).toHaveBeenCalled();
+            expect(catchCb.mock.calls).toHaveLength(1);
+            expect(catchCb.mock.calls[0]).toHaveLength(1);
+            expect((<any>catchCb.mock.calls[0][0]).message).toBe(
+              "ENOENT: no such file or directory, open 'test/test2.js'"
+            );
+          });
       });
       test("should throw error when cannot find config", () => {
         expect.assertions(5);
@@ -117,20 +122,23 @@ describe("Runner", () => {
         const thenCb = jest.fn();
         const catchCb = jest.fn();
         const configFile = "test/.unibeautifyrc2.yml";
-        return runner.beautify({
-          args: [],
-          configFile,
-          filePath: "test/test.js",
-          language: "JavaScript",
-        })
-        .catch(catchCb)
-        .then(() => {
-          expect(thenCb).not.toBeCalled();
-          expect(catchCb).toHaveBeenCalled();
-          expect(catchCb.mock.calls).toHaveLength(1);
-          expect(catchCb.mock.calls[0]).toHaveLength(1);
-          expect((<any>catchCb.mock.calls[0][0]).message).toBe(`Could not load configuration file ${configFile}`);
-        });
+        return runner
+          .beautify({
+            args: [],
+            configFile,
+            filePath: "test/test.js",
+            language: "JavaScript",
+          })
+          .catch(catchCb)
+          .then(() => {
+            expect(thenCb).not.toBeCalled();
+            expect(catchCb).toHaveBeenCalled();
+            expect(catchCb.mock.calls).toHaveLength(1);
+            expect(catchCb.mock.calls[0]).toHaveLength(1);
+            expect((<any>catchCb.mock.calls[0][0]).message).toBe(
+              `Could not load configuration file ${configFile}`
+            );
+          });
       });
       test("should throw an error saying language is required", async () => {
         const runner = new CustomRunner();
