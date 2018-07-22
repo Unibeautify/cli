@@ -56,9 +56,9 @@ export class Runner {
 
   private async readText(filePath?: string): Promise<string> {
     if (this.isTerminal && filePath) {
-      return await this.readFile(filePath);
+      return this.readFile(filePath);
     } else {
-      return await this.readFromStdin();
+      return this.readFromStdin();
     }
   }
 
@@ -110,10 +110,10 @@ export class Runner {
 
   private configFile(configFile?: string, filePath?: string) {
     const configExplorer = cosmiconfig("unibeautify", {});
-    const promise = configFile
+    const loadConfigPromise = configFile
       ? configExplorer.load(configFile)
       : configExplorer.search(filePath);
-    return promise
+    return loadConfigPromise
       .then(result => (result ? result.config : null))
       .catch(error =>
         Promise.reject(
