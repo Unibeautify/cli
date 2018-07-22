@@ -110,17 +110,8 @@ export class Runner {
 
   private configFile(configFile?: string, filePath?: string) {
     const configExplorer = cosmiconfig("unibeautify", {});
-    if (configFile) {
-      return configExplorer
-        .load(configFile)
-        .then(result => (result ? result.config : null))
-        .catch(error =>
-          Promise.reject(new Error(`Could not load configuration file ${configFile}`))
-        );
-    }
-    return configExplorer
-      .search(filePath)
-      .then(result => (result ? result.config : null))
+    const promise = configFile ? configExplorer.load(configFile) : configExplorer.search(filePath);
+    return promise.then(result => (result ? result.config : null))
       .catch(error =>
         Promise.reject(new Error(`Could not load configuration file ${configFile}`))
       );

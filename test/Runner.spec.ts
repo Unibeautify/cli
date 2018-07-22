@@ -51,6 +51,15 @@ describe("Runner", () => {
         });
         expect(runner.toJSON()).toMatchSnapshot();
       });
+      test("installed beautifiers", async () => {
+        const runner = new CustomRunner();
+        await runner.support({
+          all: false,
+          beautifiers: true,
+          json: false,
+        });
+        expect(runner.toJSON()).toMatchSnapshot();
+      });
     });
     test("should exit with message 'nothing to show'", async () => {
       const runner = new CustomRunner();
@@ -64,7 +73,7 @@ describe("Runner", () => {
     });
   });
   describe("Beautify", () => {
-    test("options in cmd", async () => {
+    test("should beautify using options passed in cmd", async () => {
       const runner = new CustomRunner();
       await runner.beautify({
         args: [],
@@ -74,7 +83,7 @@ describe("Runner", () => {
       });
       expect(runner.toJSON()).toMatchSnapshot();
     });
-    test("options in config file", async () => {
+    test("should beautify using options in config file", async () => {
       const runner = new CustomRunner();
       await runner.beautify({
         args: [],
@@ -122,6 +131,15 @@ describe("Runner", () => {
           expect(catchCb.mock.calls[0]).toHaveLength(1);
           expect((<any>catchCb.mock.calls[0][0]).message).toBe(`Could not load configuration file ${configFile}`);
         });
+      });
+      test("should throw an error saying language is required", async () => {
+        const runner = new CustomRunner();
+        await runner.beautify({
+          args: [],
+          configFile: "test/.unibeautifyrc.yml",
+          filePath: "test/test.js",
+        });
+        expect(runner.toJSON()).toMatchSnapshot();
       });
     });
   });
