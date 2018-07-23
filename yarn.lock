@@ -79,7 +79,7 @@
   version "11.1.1"
   resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-11.1.1.tgz#2e724257167fd6b615dbe4e54301e65fe597433f"
 
-"@unibeautify/beautifier-eslint@^0.5.0":
+"@unibeautify/beautifier-eslint@0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@unibeautify/beautifier-eslint/-/beautifier-eslint-0.5.0.tgz#261e2323cdca4c942f496f978d0d79d0a0cbddf8"
   dependencies:
@@ -983,7 +983,7 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^5.2.0:
+eslint@5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.2.0.tgz#3901ae249195d473e633c4acbc370068b1c964dc"
   dependencies:
