@@ -9,7 +9,6 @@ import {
 import { BaseCommand } from "./BaseCommand";
 
 export class SupportCommand extends BaseCommand {
-
   public support(options: {
     json?: boolean;
     languages?: boolean;

@@ -5,7 +5,7 @@ module.exports = {
   testEnvironment: "node",
   setupFiles: [],
   transform: {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.tsx?$": "ts-jest",
   },
   testRegex: "test/.+\\.(test|spec)\\.ts$",
   testPathIgnorePatterns: [

@@ -17,5 +17,4 @@ export abstract class BaseCommand {
   protected get exitCode(): number {
     return process.exitCode || 0;
   }
-
 }
