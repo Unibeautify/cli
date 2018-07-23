@@ -173,7 +173,7 @@ describe("BeautifyCommand", () => {
               "Unexpected end of JSON input"
             );
             const json = command.toJSON();
-            expect(json.exitCode).toBe(1);
+            expect(json.exitCode).toBe(2);
             expect(json).toMatchSnapshot("json");
           });
       });

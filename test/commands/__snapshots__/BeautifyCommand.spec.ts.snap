@@ -11,7 +11,7 @@ Object {
 
 exports[`BeautifyCommand Beautify Errors should throw an error with invalid json: json 1`] = `
 Object {
-  "exitCode": 1,
+  "exitCode": 2,
   "stderr": "Unexpected end of JSON input
 ",
   "stdout": "",

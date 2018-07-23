@@ -1,7 +1,6 @@
 import { BeautifyData } from "unibeautify";
 import * as cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
-import * as path from "path";
 
 import { setupUnibeautify } from "../utils";
 import { BaseCommand } from "./BaseCommand";
@@ -44,12 +43,11 @@ export class BeautifyCommand extends BaseCommand {
     if (configJson) {
       return this.parseConfig(configJson);
     } else {
-      return this.configFile(configFile, filePath);
+      return this.configFile({ configFile, filePath });
     }
   }
 
   private readText(filePath?: string): Promise<string> {
-    // if (this.isTerminal && filePath) {
     if (filePath) {
       return this.readFile(filePath);
     } else {
@@ -65,12 +63,17 @@ export class BeautifyCommand extends BaseCommand {
     }
   }
 
-  private configFile(configFile?: string, filePath?: string) {
-    const configExplorer = cosmiconfig("unibeautify", {});
-    const dirPath = path.dirname(filePath || "");
+  private configFile({
+    configFile,
+    filePath
+  }: {
+    configFile?: string;
+    filePath?: string;
+  }) {
+    const configExplorer = cosmiconfig("unibeautify", { stopDir: filePath });
     const loadConfigPromise = configFile
       ? configExplorer.load(configFile)
-      : configExplorer.search(dirPath);
+      : configExplorer.search(filePath);
     return loadConfigPromise
       .then(result => (result ? result.config : null))
       .catch(error =>
@@ -79,10 +82,6 @@ export class BeautifyCommand extends BaseCommand {
         )
       );
   }
-
-  // protected get isTerminal(): boolean {
-  //   return Boolean(this.stdin.isTTY);
-  // }
 
   protected readFromStdin(): Promise<string> {
     return new Promise((resolve, reject) => {
