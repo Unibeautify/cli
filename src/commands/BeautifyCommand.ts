@@ -62,10 +62,7 @@ export class BeautifyCommand extends BaseCommand {
     }
   }
 
-  private parseConfig(configJson?: string): Promise<object> {
-    if (!configJson) {
-      return Promise.resolve({});
-    }
+  private parseConfig(configJson: string): Promise<object> {
     try {
       return Promise.resolve(JSON.parse(configJson));
     } catch (error) {
