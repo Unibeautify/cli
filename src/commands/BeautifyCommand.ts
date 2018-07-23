@@ -2,9 +2,7 @@ import { BeautifyData } from "unibeautify";
 import * as cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
 
-import {
-  setupUnibeautify,
-} from "../utils";
+import { setupUnibeautify } from "../utils";
 import { BaseCommand } from "./BaseCommand";
 
 export class BeautifyCommand extends BaseCommand {
@@ -56,7 +54,7 @@ export class BeautifyCommand extends BaseCommand {
   private readText(filePath?: string): Promise<string> {
     // if (this.isTerminal && filePath) {
     if (filePath) {
-        return this.readFile(filePath);
+      return this.readFile(filePath);
     } else {
       return this.readFromStdin();
     }
