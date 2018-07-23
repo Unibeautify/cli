@@ -8,6 +8,8 @@ import {
 import { BaseCommand } from "./BaseCommand";
 
 export class BeautifyCommand extends BaseCommand {
+  protected stdin: NodeJS.ReadStream = process.stdin;
+
   public beautify(programArgs: IArgs): Promise<string> {
     const { language, filePath } = programArgs;
     return setupUnibeautify().then(unibeautify => {
@@ -52,8 +54,9 @@ export class BeautifyCommand extends BaseCommand {
   }
 
   private readText(filePath?: string): Promise<string> {
-    if (this.isTerminal && filePath) {
-      return this.readFile(filePath);
+    // if (this.isTerminal && filePath) {
+    if (filePath) {
+        return this.readFile(filePath);
     } else {
       return this.readFromStdin();
     }
@@ -87,26 +90,26 @@ export class BeautifyCommand extends BaseCommand {
   }
 
   protected get isTerminal(): boolean {
-    return Boolean(process.stdin.isTTY);
+    return Boolean(this.stdin.isTTY);
   }
 
   protected readFromStdin(): Promise<string> {
     return new Promise((resolve, reject) => {
       let text = "";
-      process.stdin.resume();
-      process.stdin.on("data", (data: string) => {
+      this.stdin.on("data", (data: string) => {
         text = data.toString();
       });
-      process.stdin.on("end", () => {
+      this.stdin.on("end", () => {
         return resolve(text);
       });
-      process.stdout.on("error", (err: any) => {
+      this.stdin.on("error", (err: any) => {
         if (err.code === "EPIPE") {
           this.exitCode = 1;
           return reject(err);
         }
         process.emit("warning", err);
       });
+      this.stdin.resume();
     });
   }
 

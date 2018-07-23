@@ -19,53 +19,53 @@ describe("SupportCommand", () => {
   describe("Support", () => {
     describe("with JSON", async () => {
       test("languages", async () => {
-        const runner = new CustomCommand();
-        await runner.support({
+        const command = new CustomCommand();
+        await command.support({
           all: true,
           json: true,
           languages: true,
         });
-        expect(runner.toJSON()).toMatchSnapshot();
+        expect(command.toJSON()).toMatchSnapshot();
       });
     });
     describe("without JSON", async () => {
       test("languages", async () => {
-        const runner = new CustomCommand();
-        await runner.support({
+        const command = new CustomCommand();
+        await command.support({
           all: true,
           json: false,
           languages: true,
         });
-        expect(runner.toJSON()).toMatchSnapshot();
+        expect(command.toJSON()).toMatchSnapshot();
       });
       test("supported languages", async () => {
-        const runner = new CustomCommand();
-        await runner.support({
+        const command = new CustomCommand();
+        await command.support({
           all: false,
           json: false,
           languages: true,
         });
-        expect(runner.toJSON()).toMatchSnapshot();
+        expect(command.toJSON()).toMatchSnapshot();
       });
       test("installed beautifiers", async () => {
-        const runner = new CustomCommand();
-        await runner.support({
+        const command = new CustomCommand();
+        await command.support({
           all: false,
           beautifiers: true,
           json: false,
         });
-        expect(runner.toJSON()).toMatchSnapshot();
+        expect(command.toJSON()).toMatchSnapshot();
       });
     });
     test("should exit with message 'nothing to show'", async () => {
-      const runner = new CustomCommand();
-      await runner.support({
+      const command = new CustomCommand();
+      await command.support({
         all: false,
         beautifiers: false,
         json: false,
         languages: false,
       });
-      expect(runner.toJSON()).toMatchSnapshot();
+      expect(command.toJSON()).toMatchSnapshot();
     });
   });
 });

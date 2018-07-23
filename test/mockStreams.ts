@@ -1,6 +1,6 @@
-import { Writable } from "stream";
+import { Writable, Readable } from "stream";
 
-export function createMockWritableStream(): MockStream {
+export function createMockWritableStream(): MockWritableStream {
   const ws: Writable & { rawData: string } = new Writable() as any;
   ws.rawData = "";
   ws._write = function(chunk: string, enc: string, next: Function) {
@@ -10,6 +10,15 @@ export function createMockWritableStream(): MockStream {
   return ws as any;
 }
 
-export interface MockStream extends NodeJS.WriteStream {
+export interface MockWritableStream extends NodeJS.WriteStream {
   rawData: string;
+}
+
+export function createMockReadableStream(rawData: string): NodeJS.ReadStream {
+  const rs = new Readable();
+  rs._read = function() {
+    rs.emit("data", rawData);
+    rs.emit("end");
+  };
+  return rs as any;
 }

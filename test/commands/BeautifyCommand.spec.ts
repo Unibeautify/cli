@@ -1,13 +1,15 @@
 import { BeautifyCommand } from "../../src/commands/BeautifyCommand";
-import { createMockWritableStream } from "../mockStreams";
+import { createMockWritableStream, createMockReadableStream } from "../mockStreams";
 
 describe("BeautifyCommand", () => {
   class CustomCommand extends BeautifyCommand {
+    constructor(private rawStdin: string = "") {
+      super();
+      this.rawStdin;
+    }
+    protected stdin = createMockReadableStream(this.rawStdin);
     protected stdout = createMockWritableStream();
     protected stderr = createMockWritableStream();
-    protected readFromStdin() {
-      return Promise.resolve("");
-    }
     public toJSON() {
       return {
         exitCode: this.exitCode,
@@ -18,35 +20,51 @@ describe("BeautifyCommand", () => {
   }
   describe("Beautify", () => {
     test("should beautify using options passed in cmd", async () => {
-      const runner = new CustomCommand();
-      await runner.beautify({
+      const command = new CustomCommand();
+      await command.beautify({
         args: [],
         configJson: `{"JavaScript": {"beautifiers": ["ESLint"],"quotes": "double"}}`,
         filePath: "test/fixtures/test1.js",
         language: "JavaScript",
       });
-      const json = runner.toJSON();
+      const json = command.toJSON();
       expect(json.exitCode).toBe(0);
       expect(json).toMatchSnapshot();
     });
     test("should beautify using options in config file", async () => {
-      const runner = new CustomCommand();
-      await runner.beautify({
+      const command = new CustomCommand();
+      await command.beautify({
         args: [],
         configFile: "test/.unibeautifyrc.yml",
         filePath: "test/fixtures/test1.js",
         language: "JavaScript",
       });
-      const json = runner.toJSON();
+      const json = command.toJSON();
       expect(json.exitCode).toBe(0);
       expect(json).toMatchSnapshot();
     });
+    test("should beautify using stdin", async () => {
+      expect.assertions(3);
+      const command = new CustomCommand("const test = 'test';");
+      return command.beautify({
+        args: [],
+        configFile: "test/.unibeautifyrc.yml",
+        language: "JavaScript",
+      })
+      .then(() => {
+        const json = command.toJSON();
+        expect(json.exitCode).toBe(0);
+        expect(json.stderr).toBe("");
+        expect(json.stdout).toBe("const test = \"test\";\n");
+      });
+    });
+
     describe("Errors", () => {
       test("should throw error when cannot find text file", () => {
-        const runner = new CustomCommand();
+        const command = new CustomCommand();
         const thenCb = jest.fn();
         const catchCb = jest.fn();
-        return runner
+        return command
           .beautify({
             args: [],
             configFile: "test/.unibeautifyrc.yml",
@@ -67,11 +85,11 @@ describe("BeautifyCommand", () => {
       });
       test("should throw error when cannot find config", () => {
         expect.assertions(5);
-        const runner = new CustomCommand();
+        const command = new CustomCommand();
         const thenCb = jest.fn();
         const catchCb = jest.fn();
         const configFile = "test/.unibeautifyrc2.yml";
-        return runner
+        return command
           .beautify({
             args: [],
             configFile,
@@ -91,10 +109,10 @@ describe("BeautifyCommand", () => {
           });
       });
       test("should throw an error saying language is required", () => {
-        const runner = new CustomCommand();
+        const command = new CustomCommand();
         const thenCb = jest.fn();
         const catchCb = jest.fn();
-        return runner.beautify({
+        return command.beautify({
           args: [],
           configFile: "test/.unibeautifyrc.yml",
           filePath: "test/fixtures/test1.js",
@@ -107,7 +125,7 @@ describe("BeautifyCommand", () => {
           expect(catchCb.mock.calls).toHaveLength(1);
           expect(catchCb.mock.calls[0]).toHaveLength(1);
           expect(catchCb).toHaveProperty(["mock", "calls", 0, 0, "message"], "A language is required.");
-          const json = runner.toJSON();
+          const json = command.toJSON();
           expect(json.exitCode).toBe(1);
           expect(json).toMatchSnapshot("json");
         });
