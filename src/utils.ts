@@ -10,15 +10,17 @@ export function findInstalledBeautifiers(): Promise<string[]> {
     gSearch()
       .then((globalPackages: GlobalSearchResult[]) => {
         const packageNames = globalPackages.map(pkg => pkg.name);
-        const beautifierNames = packageNames.filter(pkg => {
-          return /beautifier-.*/.test(pkg);
-        });
+        const beautifierNames = packageNames.filter(isBeautifierPackageName);
         return resolve(beautifierNames);
       })
       .catch((error: Error) => {
         return reject(error);
       });
   });
+}
+
+export function isBeautifierPackageName(packageName: string): boolean {
+  return /beautifier-.*/.test(packageName);
 }
 
 export function loadBeautifiers(beautifierNames: string[]): Unibeautify {

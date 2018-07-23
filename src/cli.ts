@@ -5,7 +5,8 @@
  */
 import * as program from "yargs";
 
-import { Runner } from "./Runner";
+import { BeautifyCommand } from "./commands/BeautifyCommand";
+import { SupportCommand } from "./commands/SupportCommand";
 
 program
   .version()
@@ -51,7 +52,7 @@ program
     command: "*",
     describe: "Beautify Files",
     handler: argv => {
-      const main = new Runner();
+      const main = new BeautifyCommand();
       main.beautify(argv);
     },
   })
@@ -86,7 +87,7 @@ program
     command: "support",
     describe: "List languages and beautifiers",
     handler: argv => {
-      const main = new Runner();
+      const main = new SupportCommand();
       main.support(argv);
     },
   })

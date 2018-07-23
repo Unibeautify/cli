@@ -1,35 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Runner Beautify Errors should throw an error saying language is required 1`] = `
-Object {
-  "exitCode": 1,
-  "stderr": "A language is required.
-",
-  "stdout": "",
-}
-`;
-
-exports[`Runner Beautify should beautify using options in config file 1`] = `
-Object {
-  "exitCode": 0,
-  "stderr": "",
-  "stdout": "const test = \\"test\\";
-
-",
-}
-`;
-
-exports[`Runner Beautify should beautify using options passed in cmd 1`] = `
-Object {
-  "exitCode": 0,
-  "stderr": "",
-  "stdout": "const test = \\"test\\";
-
-",
-}
-`;
-
-exports[`Runner Support should exit with message 'nothing to show' 1`] = `
+exports[`SupportCommand Support should exit with message 'nothing to show' 1`] = `
 Object {
   "exitCode": 1,
   "stderr": "Nothing to show
@@ -38,7 +9,7 @@ Object {
 }
 `;
 
-exports[`Runner Support with JSON languages 1`] = `
+exports[`SupportCommand Support with JSON languages 1`] = `
 Object {
   "exitCode": 0,
   "stderr": "",
@@ -529,7 +500,7 @@ Object {
 }
 `;
 
-exports[`Runner Support without JSON installed beautifiers 1`] = `
+exports[`SupportCommand Support without JSON installed beautifiers 1`] = `
 Object {
   "exitCode": 0,
   "stderr": "",
@@ -539,7 +510,7 @@ Object {
 }
 `;
 
-exports[`Runner Support without JSON languages 1`] = `
+exports[`SupportCommand Support without JSON languages 1`] = `
 Object {
   "exitCode": 0,
   "stderr": "",
@@ -1027,7 +998,7 @@ Object {
 }
 `;
 
-exports[`Runner Support without JSON supported languages 1`] = `
+exports[`SupportCommand Support without JSON supported languages 1`] = `
 Object {
   "exitCode": 0,
   "stderr": "",
