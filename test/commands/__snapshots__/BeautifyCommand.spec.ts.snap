@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeautifyCommand Beautify Errors should throw an error saying language is required: json 1`] = `
+Object {
+  "exitCode": 1,
+  "stderr": "A language is required.
+",
+  "stdout": "",
+}
+`;
+
+exports[`BeautifyCommand Beautify should beautify using options in config file 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "const test = \\"test\\";
+",
+}
+`;
+
+exports[`BeautifyCommand Beautify should beautify using options passed in cmd 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "const test = \\"test\\";
+",
+}
+`;

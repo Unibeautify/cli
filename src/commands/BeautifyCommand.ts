@@ -1,25 +1,21 @@
-import chalk from "chalk";
-
-import {
-  getSupportedLanguages,
-  findInstalledBeautifiers,
-  setupUnibeautify,
-  getAllLanguages,
-} from "./index";
 import { BeautifyData } from "unibeautify";
 import * as cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
 
-export class Runner {
-  protected stdout: NodeJS.WriteStream = process.stdout;
-  protected stderr: NodeJS.WriteStream = process.stderr;
+import {
+  setupUnibeautify,
+} from "../utils";
+import { BaseCommand } from "./BaseCommand";
 
-  public beautify(programArgs: IArgs): Promise<void> {
+export class BeautifyCommand extends BaseCommand {
+  public beautify(programArgs: IArgs): Promise<string> {
     const { language, filePath } = programArgs;
     return setupUnibeautify().then(unibeautify => {
       if (!language) {
-        this.writeError("A language is required.");
-        return this.exit(1);
+        const error = new Error("A language is required.");
+        this.writeError(error.message);
+        this.exitCode = 1;
+        return Promise.reject(error);
       }
       return Promise.all([
         this.readConfig(programArgs),
@@ -35,11 +31,12 @@ export class Runner {
           .beautify(data)
           .then((result: string) => {
             this.writeOut(result);
-            return this.exit(0);
+            return result;
           })
           .catch((error: Error) => {
             this.writeError(error.message);
-            return this.exit(1);
+            this.exitCode = 1;
+            return Promise.reject(error);
           });
       });
     });
@@ -48,13 +45,13 @@ export class Runner {
   private readConfig(programArgs: IArgs): Promise<any> {
     const { configFile, configJson } = programArgs;
     if (configJson) {
-      return Promise.resolve(this.parseConfig(configJson));
+      return this.parseConfig(configJson);
     } else {
       return this.configFile(configFile);
     }
   }
 
-  private async readText(filePath?: string): Promise<string> {
+  private readText(filePath?: string): Promise<string> {
     if (this.isTerminal && filePath) {
       return this.readFile(filePath);
     } else {
@@ -62,50 +59,17 @@ export class Runner {
     }
   }
 
-  public support(options: {
-    json?: boolean;
-    languages?: boolean;
-    beautifiers?: boolean;
-    all?: boolean;
-  }): Promise<void> {
-    const printer: (info: SupportInfo) => void = options.json
-      ? this.jsonPrinter
-      : this.listPrinter;
-    const info: SupportInfo = {};
-    return setupUnibeautify().then(async unibeautify => {
-      if (options.languages) {
-        if (options.all) {
-          info["languages"] = getAllLanguages();
-        } else {
-          info["languages"] = getSupportedLanguages();
-        }
-      }
-      if (options.beautifiers) {
-        const beautifiers = await findInstalledBeautifiers();
-        info["beautifiers"] = beautifiers;
-      }
-      if (Object.keys(info).length === 0) {
-        this.writeError("Nothing to show");
-        this.exit(1);
-      } else {
-        printer(info);
-        this.exit(0);
-      }
-    });
-  }
-
-  private parseConfig(configJson?: string): object {
-    let config = {};
-    if (configJson) {
-      try {
-        config = JSON.parse(configJson);
-      } catch (e) {
-        // FIXME: I think this should return an error instead of stderr
-        this.writeError(e.message);
-        this.exit(2);
-      }
+  private parseConfig(configJson?: string): Promise<object> {
+    if (!configJson) {
+      return Promise.resolve({});
     }
-    return config;
+    try {
+      return Promise.resolve(JSON.parse(configJson));
+    } catch (error) {
+      this.writeError(error.message);
+      this.exitCode = 2;
+      return Promise.reject(error);
+    }
   }
 
   private configFile(configFile?: string, filePath?: string) {
@@ -138,37 +102,12 @@ export class Runner {
       });
       process.stdout.on("error", (err: any) => {
         if (err.code === "EPIPE") {
-          return this.exit(1);
+          this.exitCode = 1;
+          return reject(err);
         }
         process.emit("warning", err);
       });
     });
-  }
-
-  private jsonPrinter = (info: SupportInfo) => {
-    this.writeOut(JSON.stringify(info, null, 2));
-    // unibeautify:ignore-next-line
-  }
-
-  private listPrinter = (info: SupportInfo) => {
-    Object.keys(info).forEach(section => {
-      this.writeOut(chalk.blue(`Supported ${section}`));
-      const items = info[section];
-      items.forEach((item, index) => this.writeOut(`${index + 1}. ${item}`));
-    });
-    // unibeautify:ignore-next-line
-  }
-
-  protected writeOut(text: string): void {
-    this.stdout.write(text + "\n");
-  }
-
-  protected writeError(text: string): void {
-    this.stderr.write(text + "\n");
-  }
-
-  protected exit(exitCode: number): void {
-    process.exit(exitCode);
   }
 
   private readFile(filePath: string): Promise<string> {
@@ -194,8 +133,4 @@ export interface IArgs {
   configFile?: string;
   configJson?: string;
   filePath?: string;
-}
-
-interface SupportInfo {
-  [section: string]: string[];
 }

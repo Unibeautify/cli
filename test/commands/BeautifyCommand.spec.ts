@@ -1,18 +1,14 @@
-import { Runner } from "../src/Runner";
-import { createMockWritableStream } from "./mockStreams";
+import { BeautifyCommand } from "../../src/commands/BeautifyCommand";
+import { createMockWritableStream } from "../mockStreams";
 
-describe("Runner", () => {
-  class CustomRunner extends Runner {
+describe("BeautifyCommand", () => {
+  class CustomCommand extends BeautifyCommand {
     protected stdout = createMockWritableStream();
     protected stderr = createMockWritableStream();
-    public exitCode: number = 0;
     protected readFromStdin() {
       return Promise.resolve("");
     }
-    protected exit(exitCode: number) {
-      this.exitCode = exitCode;
-    }
-    public toJSON(): object {
+    public toJSON() {
       return {
         exitCode: this.exitCode,
         stderr: this.stderr.rawData,
@@ -20,82 +16,34 @@ describe("Runner", () => {
       };
     }
   }
-  describe("Support", () => {
-    describe("with JSON", async () => {
-      test("languages", async () => {
-        const runner = new CustomRunner();
-        await runner.support({
-          all: true,
-          json: true,
-          languages: true,
-        });
-        expect(runner.toJSON()).toMatchSnapshot();
-      });
-    });
-    describe("without JSON", async () => {
-      test("languages", async () => {
-        const runner = new CustomRunner();
-        await runner.support({
-          all: true,
-          json: false,
-          languages: true,
-        });
-        expect(runner.toJSON()).toMatchSnapshot();
-      });
-      test("supported languages", async () => {
-        const runner = new CustomRunner();
-        await runner.support({
-          all: false,
-          json: false,
-          languages: true,
-        });
-        expect(runner.toJSON()).toMatchSnapshot();
-      });
-      test("installed beautifiers", async () => {
-        const runner = new CustomRunner();
-        await runner.support({
-          all: false,
-          beautifiers: true,
-          json: false,
-        });
-        expect(runner.toJSON()).toMatchSnapshot();
-      });
-    });
-    test("should exit with message 'nothing to show'", async () => {
-      const runner = new CustomRunner();
-      await runner.support({
-        all: false,
-        beautifiers: false,
-        json: false,
-        languages: false,
-      });
-      expect(runner.toJSON()).toMatchSnapshot();
-    });
-  });
   describe("Beautify", () => {
     test("should beautify using options passed in cmd", async () => {
-      const runner = new CustomRunner();
+      const runner = new CustomCommand();
       await runner.beautify({
         args: [],
         configJson: `{"JavaScript": {"beautifiers": ["ESLint"],"quotes": "double"}}`,
-        filePath: "test/test.js",
+        filePath: "test/fixtures/test1.js",
         language: "JavaScript",
       });
-      expect(runner.toJSON()).toMatchSnapshot();
+      const json = runner.toJSON();
+      expect(json.exitCode).toBe(0);
+      expect(json).toMatchSnapshot();
     });
     test("should beautify using options in config file", async () => {
-      const runner = new CustomRunner();
+      const runner = new CustomCommand();
       await runner.beautify({
         args: [],
         configFile: "test/.unibeautifyrc.yml",
-        filePath: "test/test.js",
+        filePath: "test/fixtures/test1.js",
         language: "JavaScript",
       });
-      expect(runner.toJSON()).toMatchSnapshot();
+      const json = runner.toJSON();
+      expect(json.exitCode).toBe(0);
+      expect(json).toMatchSnapshot();
     });
     describe("Errors", () => {
       test("should throw error when cannot find text file", () => {
-        const runner = new CustomRunner();
+        const runner = new CustomCommand();
         const thenCb = jest.fn();
         const catchCb = jest.fn();
         return runner
@@ -105,7 +53,8 @@ describe("Runner", () => {
             filePath: "test/test2.js",
             language: "JavaScript",
           })
-          .then(thenCb, catchCb)
+          .then(thenCb)
+          .catch(catchCb)
           .then(() => {
             expect(thenCb).not.toBeCalled();
             expect(catchCb).toHaveBeenCalled();
@@ -118,7 +67,7 @@ describe("Runner", () => {
       });
       test("should throw error when cannot find config", () => {
         expect.assertions(5);
-        const runner = new CustomRunner();
+        const runner = new CustomCommand();
         const thenCb = jest.fn();
         const catchCb = jest.fn();
         const configFile = "test/.unibeautifyrc2.yml";
@@ -126,9 +75,10 @@ describe("Runner", () => {
           .beautify({
             args: [],
             configFile,
-            filePath: "test/test.js",
+            filePath: "test/fixtures/test1.js",
             language: "JavaScript",
           })
+          .then(thenCb)
           .catch(catchCb)
           .then(() => {
             expect(thenCb).not.toBeCalled();
@@ -140,14 +90,27 @@ describe("Runner", () => {
             );
           });
       });
-      test("should throw an error saying language is required", async () => {
-        const runner = new CustomRunner();
-        await runner.beautify({
+      test("should throw an error saying language is required", () => {
+        const runner = new CustomCommand();
+        const thenCb = jest.fn();
+        const catchCb = jest.fn();
+        return runner.beautify({
           args: [],
           configFile: "test/.unibeautifyrc.yml",
-          filePath: "test/test.js",
+          filePath: "test/fixtures/test1.js",
+        })
+        .then(thenCb)
+        .catch(catchCb)
+        .then(() => {
+          expect(thenCb).not.toBeCalled();
+          expect(catchCb).toHaveBeenCalled();
+          expect(catchCb.mock.calls).toHaveLength(1);
+          expect(catchCb.mock.calls[0]).toHaveLength(1);
+          expect(catchCb).toHaveProperty(["mock", "calls", 0, 0, "message"], "A language is required.");
+          const json = runner.toJSON();
+          expect(json.exitCode).toBe(1);
+          expect(json).toMatchSnapshot("json");
         });
-        expect(runner.toJSON()).toMatchSnapshot();
       });
     });
   });
