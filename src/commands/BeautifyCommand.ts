@@ -1,6 +1,7 @@
 import { BeautifyData } from "unibeautify";
 import * as cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
+import * as path from "path";
 
 import { setupUnibeautify } from "../utils";
 import { BaseCommand } from "./BaseCommand";
@@ -13,9 +14,7 @@ export class BeautifyCommand extends BaseCommand {
     return setupUnibeautify().then(unibeautify => {
       if (!language) {
         const error = new Error("A language is required.");
-        this.writeError(error.message);
-        this.exitCode = 1;
-        return Promise.reject(error);
+        return this.handleError(error, 1);
       }
       return Promise.all([
         this.readConfig(programArgs),
@@ -34,20 +33,18 @@ export class BeautifyCommand extends BaseCommand {
             return result;
           })
           .catch((error: Error) => {
-            this.writeError(error.message);
-            this.exitCode = 1;
-            return Promise.reject(error);
+            return this.handleError(error, 1);
           });
       });
     });
   }
 
   private readConfig(programArgs: IArgs): Promise<any> {
-    const { configFile, configJson } = programArgs;
+    const { configFile, configJson, filePath } = programArgs;
     if (configJson) {
       return this.parseConfig(configJson);
     } else {
-      return this.configFile(configFile);
+      return this.configFile(configFile, filePath);
     }
   }
 
@@ -64,17 +61,16 @@ export class BeautifyCommand extends BaseCommand {
     try {
       return Promise.resolve(JSON.parse(configJson));
     } catch (error) {
-      this.writeError(error.message);
-      this.exitCode = 2;
-      return Promise.reject(error);
+      return this.handleError(error, 2);
     }
   }
 
   private configFile(configFile?: string, filePath?: string) {
     const configExplorer = cosmiconfig("unibeautify", {});
+    const dirPath = path.dirname(filePath || "");
     const loadConfigPromise = configFile
       ? configExplorer.load(configFile)
-      : configExplorer.search(filePath);
+      : configExplorer.search(dirPath);
     return loadConfigPromise
       .then(result => (result ? result.config : null))
       .catch(error =>
@@ -84,9 +80,9 @@ export class BeautifyCommand extends BaseCommand {
       );
   }
 
-  protected get isTerminal(): boolean {
-    return Boolean(this.stdin.isTTY);
-  }
+  // protected get isTerminal(): boolean {
+  //   return Boolean(this.stdin.isTTY);
+  // }
 
   protected readFromStdin(): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -99,8 +95,7 @@ export class BeautifyCommand extends BaseCommand {
       });
       this.stdin.on("error", (err: any) => {
         if (err.code === "EPIPE") {
-          this.exitCode = 1;
-          return reject(err);
+          return this.handleError(err, 1);
         }
         process.emit("warning", err);
       });
