@@ -65,7 +65,7 @@ export class BeautifyCommand extends BaseCommand {
 
   private configFile({
     configFile,
-    filePath
+    filePath,
   }: {
     configFile?: string;
     filePath?: string;
