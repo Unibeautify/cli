@@ -9,6 +9,15 @@ Object {
 }
 `;
 
+exports[`BeautifyCommand Beautify Errors should throw an error with invalid json: json 1`] = `
+Object {
+  "exitCode": 2,
+  "stderr": "Unexpected end of JSON input
+",
+  "stdout": "",
+}
+`;
+
 exports[`BeautifyCommand Beautify should beautify using options in config file 1`] = `
 Object {
   "exitCode": 0,
@@ -19,6 +28,15 @@ Object {
 `;
 
 exports[`BeautifyCommand Beautify should beautify using options passed in cmd 1`] = `
+Object {
+  "exitCode": 0,
+  "stderr": "",
+  "stdout": "const test = \\"test\\";
+",
+}
+`;
+
+exports[`BeautifyCommand Beautify should find config file without specifying it 1`] = `
 Object {
   "exitCode": 0,
   "stderr": "",
