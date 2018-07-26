@@ -80,7 +80,7 @@ describe("BeautifyCommand", () => {
       const command = new CustomCommand("const test = 'test';");
       const originPath = "test/fixtures/test1.js";
       const destPath = "test/commands/test1.js";
-      return fs.promises.copyFile(originPath, destPath).then(() => {
+      return copyFile(originPath, destPath).then(() => {
         return command
           .beautify({
             args: [],
@@ -90,13 +90,13 @@ describe("BeautifyCommand", () => {
             replace: true,
           })
           .then(() => {
-            return fs.promises.readFile(destPath).then(result => {
+            return readFile(destPath).then(result => {
               const json = command.toJSON();
               expect(json.exitCode).toBe(0);
               expect(json.stderr).toBe("");
               // tslint:disable-next-line:quotemark
               expect(result.toString()).toBe('const test = "test";\n');
-              return fs.promises.unlink(destPath);
+              return unlink(destPath);
             });
           });
       });
@@ -206,3 +206,36 @@ describe("BeautifyCommand", () => {
     });
   });
 });
+
+function copyFile(filePath: string, destPath: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    fs.copyFile(filePath, destPath, (error) => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve();
+    });
+  });
+}
+
+function readFile(filePath: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, (error, data) => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve(data.toString());
+    });
+  });
+}
+
+function unlink(filePath: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    fs.unlink(filePath, (error) => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve();
+    });
+  });
+}

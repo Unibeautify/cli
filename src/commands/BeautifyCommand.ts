@@ -130,7 +130,14 @@ export class BeautifyCommand extends BaseCommand {
   }
 
   private writeFile(text: string, filePath: string): Promise<void> {
-    return fs.promises.writeFile(filePath, text);
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filePath, text, (error) => {
+        if (error) {
+          return reject(error);
+        }
+        return resolve();
+      });
+    });
   }
 }
 
