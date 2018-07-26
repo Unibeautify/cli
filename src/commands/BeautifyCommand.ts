@@ -28,8 +28,9 @@ export class BeautifyCommand extends BaseCommand {
         return unibeautify
           .beautify(data)
           .then((result: string) => {
-            return this.beautifySuccess({ result, programArgs })
-            .then(() => result);
+            return this.beautifySuccess({ result, programArgs }).then(
+              () => result
+            );
           })
           .catch((error: Error) => {
             return this.handleError(error, 1);

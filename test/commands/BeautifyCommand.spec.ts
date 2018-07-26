@@ -80,27 +80,25 @@ describe("BeautifyCommand", () => {
       const command = new CustomCommand("const test = 'test';");
       const originPath = "test/fixtures/test1.js";
       const destPath = "test/commands/test1.js";
-      return fs.promises.copyFile(originPath, destPath)
-      .then(() => {
+      return fs.promises.copyFile(originPath, destPath).then(() => {
         return command
-        .beautify({
-          args: [],
-          configFile: "test/.unibeautifyrc.yml",
-          filePath: destPath,
-          language: "JavaScript",
-          replace: true,
-        })
-        .then(() => {
-          return fs.promises.readFile(destPath)
-          .then((result) => {
-            const json = command.toJSON();
-            expect(json.exitCode).toBe(0);
-            expect(json.stderr).toBe("");
-            // tslint:disable-next-line:quotemark
-            expect(result.toString()).toBe('const test = "test";\n');
-            return fs.promises.unlink(destPath);
+          .beautify({
+            args: [],
+            configFile: "test/.unibeautifyrc.yml",
+            filePath: destPath,
+            language: "JavaScript",
+            replace: true,
+          })
+          .then(() => {
+            return fs.promises.readFile(destPath).then(result => {
+              const json = command.toJSON();
+              expect(json.exitCode).toBe(0);
+              expect(json.stderr).toBe("");
+              // tslint:disable-next-line:quotemark
+              expect(result.toString()).toBe('const test = "test";\n');
+              return fs.promises.unlink(destPath);
+            });
           });
-        });
       });
     });
   });
