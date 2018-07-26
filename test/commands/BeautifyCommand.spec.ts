@@ -86,8 +86,8 @@ describe("BeautifyCommand", () => {
             args: [],
             configFile: "test/.unibeautifyrc.yml",
             filePath: destPath,
+            inplace: true,
             language: "JavaScript",
-            replace: true,
           })
           .then(() => {
             return readFile(destPath).then(result => {

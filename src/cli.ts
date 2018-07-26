@@ -29,6 +29,13 @@ program
         describe: "Path of the file to beautify from stdin",
         type: "string",
       },
+      inplace: {
+        alias: "i",
+        default: false,
+        demandOption: false,
+        describe: "Replace file(s) with beautified results",
+        type: "boolean",
+      },
       language: {
         alias: "l",
         demandOption: true,
@@ -40,13 +47,6 @@ program
         demandOption: false,
         describe: "Output file of beautified results",
         type: "string",
-      },
-      replace: {
-        alias: "r",
-        default: false,
-        demandOption: false,
-        describe: "Replace file(s) with beautified results",
-        type: "boolean",
       },
     },
     command: "*",

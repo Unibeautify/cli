@@ -121,8 +121,8 @@ export class BeautifyCommand extends BaseCommand {
     result: string;
     programArgs: IArgs;
   }) {
-    const { replace, filePath } = programArgs;
-    if (replace && filePath) {
+    const { inplace, filePath } = programArgs;
+    if (inplace && filePath) {
       return this.writeFile(result, filePath);
     } else {
       return Promise.resolve(this.writeOut(result));
@@ -148,7 +148,7 @@ export interface IArgs {
   args: string[];
   language?: string;
   outFile?: string;
-  replace?: boolean;
+  inplace?: boolean;
   configFile?: string;
   configJson?: string;
   filePath?: string;
