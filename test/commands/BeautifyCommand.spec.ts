@@ -209,7 +209,7 @@ describe("BeautifyCommand", () => {
 
 function copyFile(filePath: string, destPath: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    fs.copyFile(filePath, destPath, (error) => {
+    fs.copyFile(filePath, destPath, error => {
       if (error) {
         return reject(error);
       }
@@ -231,7 +231,7 @@ function readFile(filePath: string): Promise<string> {
 
 function unlink(filePath: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    fs.unlink(filePath, (error) => {
+    fs.unlink(filePath, error => {
       if (error) {
         return reject(error);
       }
