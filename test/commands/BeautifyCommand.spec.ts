@@ -3,6 +3,7 @@ import {
   createMockWritableStream,
   createMockReadableStream,
 } from "../mockStreams";
+import * as fs from "fs";
 
 describe("BeautifyCommand", () => {
   class CustomCommand extends BeautifyCommand {
@@ -74,109 +75,136 @@ describe("BeautifyCommand", () => {
           expect(json.stdout).toBe('const test = "test";\n');
         });
     });
-
-    describe("Errors", () => {
-      test("should throw error when cannot find text file", () => {
-        const command = new CustomCommand();
-        const thenCb = jest.fn();
-        const catchCb = jest.fn();
+    test("should beautify and write to file", async () => {
+      expect.assertions(3);
+      const command = new CustomCommand("const test = 'test';");
+      const originPath = "test/fixtures/test1.js";
+      const destPath = "test/commands/test1.js";
+      return fs.promises.copyFile(originPath, destPath)
+      .then(() => {
         return command
-          .beautify({
-            args: [],
-            configFile: "test/.unibeautifyrc.yml",
-            filePath: "test/test2.js",
-            language: "JavaScript",
-          })
-          .then(thenCb)
-          .catch(catchCb)
-          .then(() => {
-            expect(thenCb).not.toBeCalled();
-            expect(catchCb).toHaveBeenCalled();
-            expect(catchCb.mock.calls).toHaveLength(1);
-            expect(catchCb.mock.calls[0]).toHaveLength(1);
-            expect((<any>catchCb.mock.calls[0][0]).message).toBe(
-              "ENOENT: no such file or directory, open 'test/test2.js'"
-            );
-          });
-      });
-      test("should throw error when cannot find config", () => {
-        expect.assertions(5);
-        const command = new CustomCommand();
-        const thenCb = jest.fn();
-        const catchCb = jest.fn();
-        const configFile = "test/.unibeautifyrc2.yml";
-        return command
-          .beautify({
-            args: [],
-            configFile,
-            filePath: "test/fixtures/test1.js",
-            language: "JavaScript",
-          })
-          .then(thenCb)
-          .catch(catchCb)
-          .then(() => {
-            expect(thenCb).not.toBeCalled();
-            expect(catchCb).toHaveBeenCalled();
-            expect(catchCb.mock.calls).toHaveLength(1);
-            expect(catchCb.mock.calls[0]).toHaveLength(1);
-            expect((<any>catchCb.mock.calls[0][0]).message).toBe(
-              `Could not load configuration file ${configFile}`
-            );
-          });
-      });
-      test("should throw an error saying language is required", () => {
-        const command = new CustomCommand();
-        const thenCb = jest.fn();
-        const catchCb = jest.fn();
-        return command
-          .beautify({
-            args: [],
-            configFile: "test/.unibeautifyrc.yml",
-            filePath: "test/fixtures/test1.js",
-          })
-          .then(thenCb)
-          .catch(catchCb)
-          .then(() => {
-            expect(thenCb).not.toBeCalled();
-            expect(catchCb).toHaveBeenCalled();
-            expect(catchCb.mock.calls).toHaveLength(1);
-            expect(catchCb.mock.calls[0]).toHaveLength(1);
-            expect(catchCb).toHaveProperty(
-              ["mock", "calls", 0, 0, "message"],
-              "A language is required."
-            );
+        .beautify({
+          args: [],
+          configFile: "test/.unibeautifyrc.yml",
+          filePath: destPath,
+          language: "JavaScript",
+          replace: true,
+        })
+        .then(() => {
+          return fs.promises.readFile(destPath)
+          .then((result) => {
             const json = command.toJSON();
-            expect(json.exitCode).toBe(1);
-            expect(json).toMatchSnapshot("json");
+            expect(json.exitCode).toBe(0);
+            expect(json.stderr).toBe("");
+            // tslint:disable-next-line:quotemark
+            expect(result.toString()).toBe('const test = "test";\n');
+            return fs.promises.unlink(destPath);
           });
+        });
       });
-      test("should throw an error with invalid json", () => {
-        const command = new CustomCommand();
-        const thenCb = jest.fn();
-        const catchCb = jest.fn();
-        return command
-          .beautify({
-            args: [],
-            configJson: `{"JavaScript": {"beautifiers": ["ESLint"],"quotes": "double"`,
-            filePath: "test/fixtures/test1.js",
-            language: "JavaScript",
-          })
-          .then(thenCb)
-          .catch(catchCb)
-          .then(() => {
-            expect(thenCb).not.toBeCalled();
-            expect(catchCb).toHaveBeenCalled();
-            expect(catchCb.mock.calls).toHaveLength(1);
-            expect(catchCb.mock.calls[0]).toHaveLength(1);
-            expect(catchCb).toHaveProperty(
-              ["mock", "calls", 0, 0, "message"],
-              "Unexpected end of JSON input"
-            );
-            const json = command.toJSON();
-            expect(json.exitCode).toBe(2);
-            expect(json).toMatchSnapshot("json");
-          });
-      });
+    });
+  });
+  describe("Errors", () => {
+    test("should throw error when cannot find text file", () => {
+      const command = new CustomCommand();
+      const thenCb = jest.fn();
+      const catchCb = jest.fn();
+      return command
+        .beautify({
+          args: [],
+          configFile: "test/.unibeautifyrc.yml",
+          filePath: "test/test2.js",
+          language: "JavaScript",
+        })
+        .then(thenCb)
+        .catch(catchCb)
+        .then(() => {
+          expect(thenCb).not.toBeCalled();
+          expect(catchCb).toHaveBeenCalled();
+          expect(catchCb.mock.calls).toHaveLength(1);
+          expect(catchCb.mock.calls[0]).toHaveLength(1);
+          expect((<any>catchCb.mock.calls[0][0]).message).toBe(
+            "ENOENT: no such file or directory, open 'test/test2.js'"
+          );
+        });
+    });
+    test("should throw error when cannot find config", () => {
+      expect.assertions(5);
+      const command = new CustomCommand();
+      const thenCb = jest.fn();
+      const catchCb = jest.fn();
+      const configFile = "test/.unibeautifyrc2.yml";
+      return command
+        .beautify({
+          args: [],
+          configFile,
+          filePath: "test/fixtures/test1.js",
+          language: "JavaScript",
+        })
+        .then(thenCb)
+        .catch(catchCb)
+        .then(() => {
+          expect(thenCb).not.toBeCalled();
+          expect(catchCb).toHaveBeenCalled();
+          expect(catchCb.mock.calls).toHaveLength(1);
+          expect(catchCb.mock.calls[0]).toHaveLength(1);
+          expect((<any>catchCb.mock.calls[0][0]).message).toBe(
+            `Could not load configuration file ${configFile}`
+          );
+        });
+    });
+    test("should throw an error saying language is required", () => {
+      const command = new CustomCommand();
+      const thenCb = jest.fn();
+      const catchCb = jest.fn();
+      return command
+        .beautify({
+          args: [],
+          configFile: "test/.unibeautifyrc.yml",
+          filePath: "test/fixtures/test1.js",
+        })
+        .then(thenCb)
+        .catch(catchCb)
+        .then(() => {
+          expect(thenCb).not.toBeCalled();
+          expect(catchCb).toHaveBeenCalled();
+          expect(catchCb.mock.calls).toHaveLength(1);
+          expect(catchCb.mock.calls[0]).toHaveLength(1);
+          expect(catchCb).toHaveProperty(
+            ["mock", "calls", 0, 0, "message"],
+            "A language is required."
+          );
+          const json = command.toJSON();
+          expect(json.exitCode).toBe(1);
+          expect(json).toMatchSnapshot("json");
+        });
+    });
+    test("should throw an error with invalid json", () => {
+      const command = new CustomCommand();
+      const thenCb = jest.fn();
+      const catchCb = jest.fn();
+      return command
+        .beautify({
+          args: [],
+          configJson: `{"JavaScript": {"beautifiers": ["ESLint"],"quotes": "double"`,
+          filePath: "test/fixtures/test1.js",
+          language: "JavaScript",
+        })
+        .then(thenCb)
+        .catch(catchCb)
+        .then(() => {
+          expect(thenCb).not.toBeCalled();
+          expect(catchCb).toHaveBeenCalled();
+          expect(catchCb.mock.calls).toHaveLength(1);
+          expect(catchCb.mock.calls[0]).toHaveLength(1);
+          expect(catchCb).toHaveProperty(
+            ["mock", "calls", 0, 0, "message"],
+            "Unexpected end of JSON input"
+          );
+          const json = command.toJSON();
+          expect(json.exitCode).toBe(2);
+          expect(json).toMatchSnapshot("json");
+        });
     });
   });
 });
