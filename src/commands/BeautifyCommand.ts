@@ -28,7 +28,7 @@ export class BeautifyCommand extends BaseCommand {
         return unibeautify
           .beautify(data)
           .then((result: string) => {
-            return this.beautifySuccess({ result, programArgs }).then(
+            return this.writeToFileOrStdout({ result, programArgs }).then(
               () => result
             );
           })
@@ -114,7 +114,7 @@ export class BeautifyCommand extends BaseCommand {
     });
   }
 
-  private beautifySuccess({
+  private writeToFileOrStdout({
     result,
     programArgs,
   }: {
