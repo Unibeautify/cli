@@ -24,14 +24,16 @@ export function isBeautifierPackageName(packageName: string): boolean {
 }
 
 export function loadBeautifiers(beautifierNames: string[]): Unibeautify {
-  const beautifiers = beautifierNames.map(beautifierName => {
-    try {
-      return requireg(beautifierName).default;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  }).filter(Boolean);
+  const beautifiers = beautifierNames
+    .map(beautifierName => {
+      try {
+        return requireg(beautifierName).default;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    })
+    .filter(Boolean);
   return unibeautify.loadBeautifiers(beautifiers);
 }
 
