@@ -28,8 +28,9 @@ export class BeautifyCommand extends BaseCommand {
         return unibeautify
           .beautify(data)
           .then((result: string) => {
-            this.writeOut(result);
-            return result;
+            return this.writeToFileOrStdout({ result, programArgs }).then(
+              () => result
+            );
           })
           .catch((error: Error) => {
             return this.handleError(error, 1);
@@ -112,6 +113,32 @@ export class BeautifyCommand extends BaseCommand {
       });
     });
   }
+
+  private writeToFileOrStdout({
+    result,
+    programArgs,
+  }: {
+    result: string;
+    programArgs: IArgs;
+  }) {
+    const { inplace, filePath } = programArgs;
+    if (inplace && filePath) {
+      return this.writeFile(result, filePath);
+    } else {
+      return Promise.resolve(this.writeOut(result));
+    }
+  }
+
+  private writeFile(text: string, filePath: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filePath, text, error => {
+        if (error) {
+          return reject(error);
+        }
+        return resolve();
+      });
+    });
+  }
 }
 
 /**
@@ -121,7 +148,7 @@ export interface IArgs {
   args: string[];
   language?: string;
   outFile?: string;
-  replace?: boolean;
+  inplace?: boolean;
   configFile?: string;
   configJson?: string;
   filePath?: string;
