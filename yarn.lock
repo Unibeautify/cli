@@ -3135,7 +3135,7 @@ require-uncached@^1.0.3:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
 
-requireg@^0.1.7, requireg@^0.1.8:
+requireg@^0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/requireg/-/requireg-0.1.8.tgz#75c1d495294fa5ddfd51e4fcca4965c44f1ed8b1"
   dependencies:
@@ -3768,13 +3768,13 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
-unibeautify@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/unibeautify/-/unibeautify-0.15.0.tgz#deb7e07fb6187e918a1ce9937f804fbc37d0612d"
+unibeautify@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/unibeautify/-/unibeautify-0.16.0.tgz#f0fceb2fd11f3bd9ecebeb9ed7674483b8954e1d"
   dependencies:
     diff "^3.5.0"
-    lodash "^4.17.5"
-    requireg "^0.1.7"
+    lodash "^4.17.10"
+    requireg "^0.1.8"
     semver "^5.5.0"
 
 union-value@^1.0.0:
