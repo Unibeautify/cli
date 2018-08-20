@@ -3134,6 +3134,14 @@ requireg@^0.1.8:
     rc "~1.2.7"
     resolve "~1.7.1"
 
+requireg@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/requireg/-/requireg-0.2.0.tgz#4e1c217be770fe62965208075d6162afb4594806"
+  dependencies:
+    nested-error-stacks "~2.0.1"
+    rc "~1.2.7"
+    resolve "~1.7.1"
+
 resolve-cwd@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/resolve-cwd/-/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
