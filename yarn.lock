@@ -89,9 +89,9 @@
     "@types/glob" "*"
     "@types/node" "*"
 
-"@types/yargs@11.1.1":
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-11.1.1.tgz#2e724257167fd6b615dbe4e54301e65fe597433f"
+"@types/yargs@11.1.2":
+  version "11.1.2"
+  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-11.1.2.tgz#fd4b676846fe731a5de5c6d2e5ef6a377262fc30"
 
 "@unibeautify/beautifier-eslint@0.5.0":
   version "0.5.0"
