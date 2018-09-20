@@ -48,22 +48,22 @@
     "@types/cosmiconfig": "5.0.3",
     "@types/jest": "23.3.2",
     "@types/yargs": "12.0.0",
-    "@unibeautify/beautifier-eslint": "0.5.0",
+    "@unibeautify/beautifier-eslint": "0.6.0",
     "eslint": "5.6.0",
     "jest": "23.6.0",
     "npm-run-all": "4.1.3",
     "rimraf": "2.6.2",
-    "ts-jest": "23.1.4",
+    "ts-jest": "23.10.0",
     "tslint": "5.11.0",
     "typedoc": "0.12.0",
     "typescript": "3.0.3"
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "cosmiconfig": "^5.0.5",
+    "cosmiconfig": "^5.0.6",
     "g-search": "^0.3.0",
-    "requireg": "^0.2.0",
+    "requireg": "^0.2.1",
     "unibeautify": "^0.17.0",
-    "yargs": "^12.0.1"
+    "yargs": "^12.0.2"
   }
 }
