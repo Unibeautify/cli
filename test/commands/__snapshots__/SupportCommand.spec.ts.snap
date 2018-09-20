@@ -1003,7 +1003,8 @@ Object {
   "exitCode": 0,
   "stderr": "",
   "stdout": "[34mSupported languages[39m
-1. JavaScript
+1. JSX
+2. JavaScript
 ",
 }
 `;

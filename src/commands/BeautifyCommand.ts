@@ -1,5 +1,5 @@
 import { BeautifyData } from "unibeautify";
-import * as cosmiconfig from "cosmiconfig";
+import cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
 
 import { setupUnibeautify } from "../utils";
