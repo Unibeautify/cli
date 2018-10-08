@@ -72,10 +72,10 @@
   resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.12.3.tgz#b672cfaac25cbbc634a0fd92c515f66faa18dbca"
   integrity sha512-pGF/zvYOACZ/gLGWdQH8zSwteQS1epp68yRcVLJMgUck/MjEn/FBYmPub9pXT8C1e4a8YZfHo1CKyV8q1vKUnQ==
 
-"@types/jest@23.3.3":
-  version "23.3.3"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.3.tgz#246ebcc52771d2327bb8e37aa971b412d9dc4237"
-  integrity sha512-G6EBrbjWDfmIpYu8UcRBOhwtDiYaLj5N5jUR5rx0YvbKxRBhXPZVLUmtfShewSUNKiQwpHavpML69a2WMbIlEQ==
+"@types/jest@23.3.4":
+  version "23.3.4"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.4.tgz#cc43ae176a91dcb1504839b0b9d6659386cf0af5"
+  integrity sha512-46jSw0QMerCRkhJZbOwPA0Eb9T1p74HtECsfa0GXdgjkenSGhgvK96w+e2PEPu4GF0/brUK5WQKq/rUQQFyAxA==
 
 "@types/lodash@^4.14.110":
   version "4.14.116"
