@@ -1,9 +1,15 @@
+import chalk from "chalk";
+
 export abstract class BaseCommand {
   protected stdout: NodeJS.WriteStream = process.stdout;
   protected stderr: NodeJS.WriteStream = process.stderr;
 
   protected writeOut(text: string): void {
     this.stdout.write(text + "\n");
+  }
+
+  protected writeOutHeading(text: string): void {
+    this.writeOut(this.stdout.isTTY ? chalk.blue(text) : text);
   }
 
   protected writeError(text: string): void {

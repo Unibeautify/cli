@@ -504,7 +504,7 @@ exports[`SupportCommand Support without JSON installed beautifiers 1`] = `
 Object {
   "exitCode": 0,
   "stderr": "",
-  "stdout": "[34mSupported beautifiers[39m
+  "stdout": "Supported beautifiers
 1. @unibeautify/beautifier-eslint
 ",
 }
@@ -514,7 +514,7 @@ exports[`SupportCommand Support without JSON languages 1`] = `
 Object {
   "exitCode": 0,
   "stderr": "",
-  "stdout": "[34mSupported languages[39m
+  "stdout": "Supported languages
 1. 1C Enterprise
 2. ABAP
 3. ABNF
@@ -1002,7 +1002,7 @@ exports[`SupportCommand Support without JSON supported languages 1`] = `
 Object {
   "exitCode": 0,
   "stderr": "",
-  "stdout": "[34mSupported languages[39m
+  "stdout": "Supported languages
 1. JSX
 2. JavaScript
 ",
