@@ -18,9 +18,12 @@ export abstract class BaseCommand {
     return process.exitCode || 0;
   }
 
-  protected handleError(error: Error, exitCode: number): Promise<never> {
+  protected handleErrorMessage(message: string, exitCode: number): Promise<never> {
     this.writeError(error.message);
     this.exitCode = exitCode;
     return Promise.reject(error);
+  }
+
+  protected handleError(error: Error, exitCode: number): Promise<never> {
   }
 }
