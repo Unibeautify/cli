@@ -20,14 +20,14 @@ before_script:
       echo Error:TRAVIS_OS_NAME && exit 1;
     fi
   - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build  
+  - ./cc-test-reporter before-build
 script:
   - npm install -g unibeautify @unibeautify/beautifier-eslint eslint@4
   - npm run lint
   - npm run build
   - npm test
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT  
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 notifications:
   email:
     on_success: never
