@@ -12,17 +12,14 @@ cache:
   directories:
   - node_modules # NPM packages
 before_script:
-  - OS_NAME=$(uname | tr A-Z a-z)
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-${OS_NAME}-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+  - ./.travis-codeclimate.sh before
 script:
   - npm install -g unibeautify @unibeautify/beautifier-eslint eslint@4
   - npm run lint
   - npm run build
   - npm test
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./.travis-codeclimate.sh after
 notifications:
   email:
     on_success: never
