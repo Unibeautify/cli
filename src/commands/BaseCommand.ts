@@ -13,7 +13,7 @@ export abstract class BaseCommand {
   }
 
   protected writeError(text: string): void {
-    this.stderr.write(chalk.red(text) + "\n");
+    this.stderr.write((this.stdout.isTTY ? chalk.red(text) : text) + "\n");
   }
 
   protected set exitCode(exitCode: number) {

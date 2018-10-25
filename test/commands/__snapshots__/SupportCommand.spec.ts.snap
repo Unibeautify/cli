@@ -3,7 +3,7 @@
 exports[`SupportCommand Support should exit with message 'nothing to show' 1`] = `
 Object {
   "exitCode": 1,
-  "stderr": "[31mNothing to show[39m
+  "stderr": "Nothing to show
 ",
   "stdout": "",
 }

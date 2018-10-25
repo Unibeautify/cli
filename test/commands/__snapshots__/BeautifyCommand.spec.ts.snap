@@ -33,7 +33,7 @@ Object {
 exports[`BeautifyCommand Errors should throw an error saying cannot find language: json 1`] = `
 Object {
   "exitCode": 1,
-  "stderr": "[31mCannot find language.[39m
+  "stderr": "Cannot find language.
 ",
   "stdout": "",
 }
@@ -42,7 +42,7 @@ Object {
 exports[`BeautifyCommand Errors should throw an error saying language is required: json 1`] = `
 Object {
   "exitCode": 1,
-  "stderr": "[31mA language is required.[39m
+  "stderr": "A language is required.
 ",
   "stdout": "",
 }
@@ -51,7 +51,7 @@ Object {
 exports[`BeautifyCommand Errors should throw an error with invalid json: json 1`] = `
 Object {
   "exitCode": 2,
-  "stderr": "[31mUnexpected end of JSON input[39m
+  "stderr": "Unexpected end of JSON input
 ",
   "stdout": "",
 }
@@ -60,7 +60,7 @@ Object {
 exports[`BeautifyCommand Errors should throw error saying no text in file or stdin: json 1`] = `
 Object {
   "exitCode": 1,
-  "stderr": "[31mNo text in the file or stdin.[39m
+  "stderr": "No text in the file or stdin.
 ",
   "stdout": "",
 }
