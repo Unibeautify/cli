@@ -19,6 +19,10 @@ export class BeautifyCommand extends BaseCommand {
         this.readConfig(programArgs),
         this.readText(filePath),
       ]).then(([config, text]) => {
+        if (!text) {
+          const error = new Error("No text in the file or stdin.");
+          return this.handleError(error, 1);
+        }
         const data: BeautifyData = {
           filePath: filePath,
           languageName: language,
@@ -87,11 +91,15 @@ export class BeautifyCommand extends BaseCommand {
   protected readFromStdin(): Promise<string> {
     return new Promise((resolve, reject) => {
       let text = "";
+      if (this.stdin.isTTY) {
+        resolve(text);
+        return;
+      }
       this.stdin.on("data", (data: string) => {
         text = data.toString();
       });
       this.stdin.on("end", () => {
-        return resolve(text);
+        resolve(text);
       });
       this.stdin.on("error", (err: any) => {
         if (err.code === "EPIPE") {

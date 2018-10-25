@@ -59,7 +59,6 @@ describe("BeautifyCommand", () => {
       expect(json).toMatchSnapshot();
     });
     test("should beautify using stdin", async () => {
-      expect.assertions(3);
       const command = new CustomCommand("const test = 'test';");
       return command
         .beautify({
@@ -76,7 +75,6 @@ describe("BeautifyCommand", () => {
         });
     });
     test("should beautify and write to file", async () => {
-      expect.assertions(3);
       const command = new CustomCommand("const test = 'test';");
       const originPath = "test/fixtures/test1.js";
       const destPath = "test/commands/test1.js";
@@ -127,7 +125,6 @@ describe("BeautifyCommand", () => {
         });
     });
     test("should throw error when cannot find config", () => {
-      expect.assertions(5);
       const command = new CustomCommand();
       const thenCb = jest.fn();
       const catchCb = jest.fn();
@@ -171,6 +168,59 @@ describe("BeautifyCommand", () => {
           expect(catchCb).toHaveProperty(
             ["mock", "calls", 0, 0, "message"],
             "A language is required."
+          );
+          const json = command.toJSON();
+          expect(json.exitCode).toBe(1);
+          expect(json).toMatchSnapshot("json");
+        });
+    });
+    test("should throw an error saying cannot find language", () => {
+      const command = new CustomCommand();
+      const thenCb = jest.fn();
+      const catchCb = jest.fn();
+      return command
+        .beautify({
+          args: [],
+          configFile: "test/.unibeautifyrc.yml",
+          filePath: "test/fixtures/test1.js",
+          language: "javascript",
+        })
+        .then(thenCb)
+        .catch(catchCb)
+        .then(() => {
+          expect(thenCb).not.toBeCalled();
+          expect(catchCb).toHaveBeenCalled();
+          expect(catchCb.mock.calls).toHaveLength(1);
+          expect(catchCb.mock.calls[0]).toHaveLength(1);
+          expect(catchCb).toHaveProperty(
+            ["mock", "calls", 0, 0, "message"],
+            "Cannot find language."
+          );
+          const json = command.toJSON();
+          expect(json.exitCode).toBe(1);
+          expect(json).toMatchSnapshot("json");
+        });
+    });
+    test("should throw error saying no text in file or stdin", async () => {
+      const command = new CustomCommand("");
+      const thenCb = jest.fn();
+      const catchCb = jest.fn();
+      return command
+        .beautify({
+          args: [],
+          configFile: "test/.unibeautifyrc.yml",
+          language: "JavaScript",
+        })
+        .then(thenCb)
+        .catch(catchCb)
+        .then(() => {
+          expect(thenCb).not.toBeCalled();
+          expect(catchCb).toHaveBeenCalled();
+          expect(catchCb.mock.calls).toHaveLength(1);
+          expect(catchCb.mock.calls[0]).toHaveLength(1);
+          expect(catchCb).toHaveProperty(
+            ["mock", "calls", 0, 0, "message"],
+            "No text in the file or stdin."
           );
           const json = command.toJSON();
           expect(json.exitCode).toBe(1);
