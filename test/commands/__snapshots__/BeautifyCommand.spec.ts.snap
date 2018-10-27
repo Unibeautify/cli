@@ -56,12 +56,3 @@ Object {
   "stdout": "",
 }
 `;
-
-exports[`BeautifyCommand Errors should throw error saying no text in file or stdin: json 1`] = `
-Object {
-  "exitCode": 1,
-  "stderr": "No text in the file or stdin.
-",
-  "stdout": "",
-}
-`;
