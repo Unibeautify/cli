@@ -19,10 +19,6 @@ export class BeautifyCommand extends BaseCommand {
         this.readConfig(programArgs),
         this.readText(filePath),
       ]).then(([config, text]) => {
-        if (!text) {
-          const error = new Error("No text in the file or stdin.");
-          return this.handleError(error, 1);
-        }
         const data: BeautifyData = {
           filePath: filePath,
           languageName: language,
