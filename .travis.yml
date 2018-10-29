@@ -13,18 +13,14 @@ cache:
   directories:
   - node_modules # NPM packages
 before_script:
-  - if [[ "$TRAVIS_OS_NAME" != "windows" ]]; then
-      ./.travis-codeclimate.sh before;
-    fi
+  - ./.travis-codeclimate.sh before
 script:
   - npm install -g unibeautify @unibeautify/beautifier-eslint eslint@4
   - npm run lint
   - npm run build
   - npm test
 after_script:
-  - if [[ "$TRAVIS_OS_NAME" != "windows" ]]; then
-      ./.travis-codeclimate.sh after;
-    fi
+  - ./.travis-codeclimate.sh after
 notifications:
   email:
     on_success: never
