@@ -2,3 +2,4 @@
 JavaScript:
   beautifiers: ["ESLint"]
   quotes: "double"
+  end_with_newline: false
