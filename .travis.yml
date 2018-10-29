@@ -20,7 +20,9 @@ script:
   - npm run build
   - npm test
 after_script:
+  - echo in after_script before the codeclimate command
   - ./.travis-codeclimate.sh after
+  - echo in after_script after the codeclimate command
 notifications:
   email:
     on_success: never
