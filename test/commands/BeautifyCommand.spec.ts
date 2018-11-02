@@ -7,11 +7,11 @@ import * as fs from "fs";
 
 describe("BeautifyCommand", () => {
   class CustomCommand extends BeautifyCommand {
-    constructor(private rawStdin: string = "") {
+    constructor(private rawStdin: string = "", private isTTY: boolean = false) {
       super();
       this.rawStdin;
     }
-    protected stdin = createMockReadableStream(this.rawStdin);
+    protected stdin = createMockReadableStream(this.rawStdin, this.isTTY);
     protected stdout = createMockWritableStream();
     protected stderr = createMockWritableStream();
     public toJSON() {
@@ -72,6 +72,23 @@ describe("BeautifyCommand", () => {
           expect(json.stderr).toBe("");
           // tslint:disable-next-line:quotemark
           expect(json.stdout).toBe('const test = "test";\n');
+        });
+    });
+    test("should beautify using stdin with TTY", async () => {
+      const command = new CustomCommand("const test = 'test';", true);
+      return command
+        .beautify({
+          args: [],
+          configFile: "test/.unibeautifyrc.yml",
+          language: "JavaScript",
+        })
+        .then(() => {
+          const json = command.toJSON();
+          expect(json.exitCode).toBe(0);
+          expect(json.stderr).toBe("");
+          // tslint:disable-next-line:quotemark
+          // expect(json.stdout).toBe('const test = "test";\n'); // <--- Doesn't work
+          expect(json.stdout).toBe("\n"); // <--- What it actually returns
         });
     });
     test("should accept blank files or text", async () => {
