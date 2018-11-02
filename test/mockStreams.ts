@@ -14,11 +14,12 @@ export interface MockWritableStream extends NodeJS.WriteStream {
   rawData: string;
 }
 
-export function createMockReadableStream(rawData: string): NodeJS.ReadStream {
-  const rs = new Readable();
+export function createMockReadableStream(rawData: string, isTTY: boolean = false): NodeJS.ReadStream {
+  const rs: any = new Readable();
+  rs.isTTY = isTTY;
   rs._read = function() {
     rs.emit("data", rawData);
     rs.emit("end");
   };
-  return rs as any;
+  return rs;
 }
