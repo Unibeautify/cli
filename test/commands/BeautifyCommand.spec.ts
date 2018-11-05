@@ -86,9 +86,7 @@ describe("BeautifyCommand", () => {
           const json = command.toJSON();
           expect(json.exitCode).toBe(0);
           expect(json.stderr).toBe("");
-          // tslint:disable-next-line:quotemark
-          // expect(json.stdout).toBe('const test = "test";\n'); // <--- Doesn't work
-          expect(json.stdout).toBe("\n"); // <--- What it actually returns
+          expect(json.stdout).toBe("\n");
         });
     });
     test("should accept blank files or text", async () => {
