@@ -142,18 +142,23 @@ export class BeautifyCommand extends BaseCommand {
     });
   }
 
-  private validateLanguage(language: string | undefined, unibeautify: Unibeautify) {
+  private validateLanguage(
+    language: string | undefined,
+    unibeautify: Unibeautify
+  ) {
     if (!language) {
       const error = new Error("A language is required.");
       return this.handleError(error, 1);
     }
-    const langs = unibeautify.findLanguages({name: language});
+    const langs = unibeautify.findLanguages({ name: language });
     if (langs.length === 0) {
       const bestMatchLanguage = getAllLanguages().find(lang => {
         return lang.toLowerCase() === language.toLowerCase();
       });
       if (bestMatchLanguage) {
-        const error = new Error(`Language '${language}' was not found. Did you mean '${bestMatchLanguage}'?`);
+        const error = new Error(
+          `Language '${language}' was not found. Did you mean '${bestMatchLanguage}'?`
+        );
         return this.handleError(error, 1);
       }
     }
