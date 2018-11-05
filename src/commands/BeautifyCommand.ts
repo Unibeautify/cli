@@ -11,7 +11,7 @@ export class BeautifyCommand extends BaseCommand {
   public beautify(programArgs: IArgs): Promise<string> {
     const { language, filePath } = programArgs;
     return setupUnibeautify().then(unibeautify => {
-      return this.validateLanguage(language, unibeautify).then(() =>{
+      return this.validateLanguage(language, unibeautify).then(() => {
         return Promise.all([
           this.readConfig(programArgs),
           this.readText(filePath),
