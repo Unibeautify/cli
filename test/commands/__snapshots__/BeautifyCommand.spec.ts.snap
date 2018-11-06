@@ -30,6 +30,15 @@ Object {
 }
 `;
 
+exports[`BeautifyCommand Errors should throw an error saying cannot find language: json 1`] = `
+Object {
+  "exitCode": 1,
+  "stderr": "Cannot find language.
+",
+  "stdout": "",
+}
+`;
+
 exports[`BeautifyCommand Errors should throw an error saying language is required: json 1`] = `
 Object {
   "exitCode": 1,

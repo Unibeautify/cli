@@ -87,11 +87,15 @@ export class BeautifyCommand extends BaseCommand {
   protected readFromStdin(): Promise<string> {
     return new Promise((resolve, reject) => {
       let text = "";
+      if (this.stdin.isTTY) {
+        resolve(text);
+        return;
+      }
       this.stdin.on("data", (data: string) => {
         text = data.toString();
       });
       this.stdin.on("end", () => {
-        return resolve(text);
+        resolve(text);
       });
       this.stdin.on("error", (err: any) => {
         if (err.code === "EPIPE") {

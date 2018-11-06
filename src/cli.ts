@@ -53,7 +53,7 @@ program
     describe: "Beautify Files",
     handler: argv => {
       const main = new BeautifyCommand();
-      main.beautify(argv);
+      main.beautify(argv).catch((error: Error) => {});
     },
   })
   .command({
@@ -88,7 +88,7 @@ program
     describe: "List languages and beautifiers",
     handler: argv => {
       const main = new SupportCommand();
-      main.support(argv);
+      main.support(argv).catch((error: Error) => {});
     },
   })
   .help().argv;
