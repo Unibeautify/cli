@@ -259,6 +259,33 @@ describe("BeautifyCommand", () => {
           expect(json).toMatchSnapshot("json");
         });
     });
+    test("should throw an error suggesting C, D and E for language", () => {
+      const command = new CustomCommand();
+      const thenCb = jest.fn();
+      const catchCb = jest.fn();
+      return command
+        .beautify({
+          args: [],
+          configFile: "test/.unibeautifyrc.yml",
+          filePath: "test/fixtures/test1.js",
+          language: "a",
+        })
+        .then(thenCb)
+        .catch(catchCb)
+        .then(() => {
+          expect(thenCb).not.toBeCalled();
+          expect(catchCb).toHaveBeenCalled();
+          expect(catchCb.mock.calls).toHaveLength(1);
+          expect(catchCb.mock.calls[0]).toHaveLength(1);
+          expect(catchCb).toHaveProperty(
+            ["mock", "calls", 0, 0, "message"],
+            "Language 'a' was not found. Did you mean:\n\n- C\n- D\n- E"
+          );
+          const json = command.toJSON();
+          expect(json.exitCode).toBe(1);
+          expect(json).toMatchSnapshot("json");
+        });
+    });
     test("should throw an error with invalid json", () => {
       const command = new CustomCommand();
       const thenCb = jest.fn();
