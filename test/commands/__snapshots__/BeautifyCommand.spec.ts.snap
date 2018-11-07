@@ -52,10 +52,9 @@ exports[`BeautifyCommand Errors should throw an error suggesting C, D and E for 
 Object {
   "exitCode": 1,
   "stderr": "Language 'a' was not found. Did you mean:
-
-- C
-- D
-- E
+  - C
+  - D
+  - E
 ",
   "stdout": "",
 }
@@ -65,8 +64,7 @@ exports[`BeautifyCommand Errors should throw an error suggesting JavaScript for 
 Object {
   "exitCode": 1,
   "stderr": "Language 'javascript' was not found. Did you mean:
-
-- JavaScript
+  - JavaScript
 ",
   "stdout": "",
 }

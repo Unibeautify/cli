@@ -166,9 +166,9 @@ export class BeautifyCommand extends BaseCommand {
       if (bestMatchLanguages.length > 0) {
         const limit = 3;
         const error = new Error(
-          `Language '${language}' was not found. Did you mean:\n\n${bestMatchLanguages
+          `Language '${language}' was not found. Did you mean:\n${bestMatchLanguages
             .slice(0, limit)
-            .map(lang => `- ${lang}`)
+            .map(lang => `  - ${lang}`)
             .join("\n")}`
         );
         return this.handleError(error, 1);

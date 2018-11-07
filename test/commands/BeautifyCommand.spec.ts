@@ -252,7 +252,7 @@ describe("BeautifyCommand", () => {
           expect(catchCb.mock.calls[0]).toHaveLength(1);
           expect(catchCb).toHaveProperty(
             ["mock", "calls", 0, 0, "message"],
-            "Language 'javascript' was not found. Did you mean:\n\n- JavaScript"
+            "Language 'javascript' was not found. Did you mean:\n  - JavaScript"
           );
           const json = command.toJSON();
           expect(json.exitCode).toBe(1);
@@ -279,7 +279,7 @@ describe("BeautifyCommand", () => {
           expect(catchCb.mock.calls[0]).toHaveLength(1);
           expect(catchCb).toHaveProperty(
             ["mock", "calls", 0, 0, "message"],
-            "Language 'a' was not found. Did you mean:\n\n- C\n- D\n- E"
+            "Language 'a' was not found. Did you mean:\n  - C\n  - D\n  - E"
           );
           const json = command.toJSON();
           expect(json.exitCode).toBe(1);
