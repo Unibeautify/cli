@@ -51,7 +51,9 @@ Object {
 exports[`BeautifyCommand Errors should throw an error suggesting JavaScript for language: json 1`] = `
 Object {
   "exitCode": 1,
-  "stderr": "Language 'javascript' was not found. Did you mean 'JavaScript'?
+  "stderr": "Language 'javascript' was not found. Did you mean:
+
+- JavaScript
 ",
   "stdout": "",
 }

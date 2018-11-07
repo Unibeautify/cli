@@ -214,7 +214,7 @@ describe("BeautifyCommand", () => {
           args: [],
           configFile: "test/.unibeautifyrc.yml",
           filePath: "test/fixtures/test1.js",
-          language: "aMadeUpLanguage",
+          language: "thisIsntALanguage",
         })
         .then(thenCb)
         .catch(catchCb)
@@ -252,7 +252,7 @@ describe("BeautifyCommand", () => {
           expect(catchCb.mock.calls[0]).toHaveLength(1);
           expect(catchCb).toHaveProperty(
             ["mock", "calls", 0, 0, "message"],
-            "Language 'javascript' was not found. Did you mean 'JavaScript'?"
+            "Language 'javascript' was not found. Did you mean:\n\n- JavaScript"
           );
           const json = command.toJSON();
           expect(json.exitCode).toBe(1);

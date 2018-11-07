@@ -1,6 +1,7 @@
 import { BeautifyData, Unibeautify } from "unibeautify";
 import cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
+import * as levenshtein from "fast-levenshtein";
 
 import { setupUnibeautify, getAllLanguages } from "../utils";
 import { BaseCommand } from "./BaseCommand";
@@ -145,24 +146,30 @@ export class BeautifyCommand extends BaseCommand {
   private validateLanguage(
     language: string | undefined,
     unibeautify: Unibeautify
-  ) {
+  ): Promise<void> {
     if (!language) {
       const error = new Error("A language is required.");
       return this.handleError(error, 1);
     }
     const langs = unibeautify.findLanguages({ name: language });
     if (langs.length === 0) {
-      const bestMatchLanguage = getAllLanguages().find(lang => {
-        return lang.toLowerCase() === language.toLowerCase();
-      });
-      if (bestMatchLanguage) {
+      const allLanguages = getAllLanguages();
+      const distances: number[] = allLanguages.map(lang =>
+        levenshtein.get(lang.toLowerCase(), language.toLowerCase())
+      );
+      const bestDistance: number = Math.min(...distances);
+      const distanceThreshold = 2;
+      const bestMatchLanguages = allLanguages.filter((lang, index) =>
+        distances[index] <= Math.min(distanceThreshold, bestDistance)
+      );
+      if (bestMatchLanguages.length > 0) {
         const error = new Error(
-          `Language '${language}' was not found. Did you mean '${bestMatchLanguage}'?`
+          `Language '${language}' was not found. Did you mean:\n\n${bestMatchLanguages.map(lang => `- ${lang}`).join("\n")}`
         );
         return this.handleError(error, 1);
       }
     }
-    return Promise.resolve({});
+    return Promise.resolve();
   }
 }
 
