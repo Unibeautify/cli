@@ -159,12 +159,15 @@ export class BeautifyCommand extends BaseCommand {
       );
       const bestDistance: number = Math.min(...distances);
       const distanceThreshold = 2;
-      const bestMatchLanguages = allLanguages.filter((lang, index) =>
-        distances[index] <= Math.min(distanceThreshold, bestDistance)
+      const bestMatchLanguages = allLanguages.filter(
+        (lang, index) =>
+          distances[index] <= Math.min(distanceThreshold, bestDistance)
       );
       if (bestMatchLanguages.length > 0) {
         const error = new Error(
-          `Language '${language}' was not found. Did you mean:\n\n${bestMatchLanguages.map(lang => `- ${lang}`).join("\n")}`
+          `Language '${language}' was not found. Did you mean:\n\n${bestMatchLanguages
+            .map(lang => `- ${lang}`)
+            .join("\n")}`
         );
         return this.handleError(error, 1);
       }
