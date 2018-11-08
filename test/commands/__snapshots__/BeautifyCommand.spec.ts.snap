@@ -48,6 +48,28 @@ Object {
 }
 `;
 
+exports[`BeautifyCommand Errors should throw an error suggesting C, D and E for language: json 1`] = `
+Object {
+  "exitCode": 1,
+  "stderr": "Language 'a' was not found. Did you mean:
+  - C
+  - D
+  - E
+",
+  "stdout": "",
+}
+`;
+
+exports[`BeautifyCommand Errors should throw an error suggesting JavaScript for language: json 1`] = `
+Object {
+  "exitCode": 1,
+  "stderr": "Language 'javascript' was not found. Did you mean:
+  - JavaScript
+",
+  "stdout": "",
+}
+`;
+
 exports[`BeautifyCommand Errors should throw an error with invalid json: json 1`] = `
 Object {
   "exitCode": 2,

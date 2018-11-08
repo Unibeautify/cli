@@ -1,8 +1,9 @@
-import { BeautifyData } from "unibeautify";
+import { BeautifyData, Unibeautify } from "unibeautify";
 import cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
+import * as levenshtein from "fast-levenshtein";
 
-import { setupUnibeautify } from "../utils";
+import { setupUnibeautify, getAllLanguages } from "../utils";
 import { BaseCommand } from "./BaseCommand";
 
 export class BeautifyCommand extends BaseCommand {
@@ -11,30 +12,28 @@ export class BeautifyCommand extends BaseCommand {
   public beautify(programArgs: IArgs): Promise<string> {
     const { language, filePath } = programArgs;
     return setupUnibeautify().then(unibeautify => {
-      if (!language) {
-        const error = new Error("A language is required.");
-        return this.handleError(error, 1);
-      }
-      return Promise.all([
-        this.readConfig(programArgs),
-        this.readText(filePath),
-      ]).then(([config, text]) => {
-        const data: BeautifyData = {
-          filePath: filePath,
-          languageName: language,
-          options: (config as any) || {},
-          text,
-        };
-        return unibeautify
-          .beautify(data)
-          .then((result: string) => {
-            return this.writeToFileOrStdout({ result, programArgs }).then(
-              () => result
-            );
-          })
-          .catch((error: Error) => {
-            return this.handleError(error, 1);
-          });
+      return this.validateLanguage(language, unibeautify).then(() => {
+        return Promise.all([
+          this.readConfig(programArgs),
+          this.readText(filePath),
+        ]).then(([config, text]) => {
+          const data: BeautifyData = {
+            filePath: filePath,
+            languageName: language,
+            options: (config as any) || {},
+            text,
+          };
+          return unibeautify
+            .beautify(data)
+            .then((result: string) => {
+              return this.writeToFileOrStdout({ result, programArgs }).then(
+                () => result
+              );
+            })
+            .catch((error: Error) => {
+              return this.handleError(error, 1);
+            });
+        });
       });
     });
   }
@@ -142,6 +141,40 @@ export class BeautifyCommand extends BaseCommand {
         return resolve();
       });
     });
+  }
+
+  private validateLanguage(
+    language: string | undefined,
+    unibeautify: Unibeautify
+  ): Promise<void> {
+    if (!language) {
+      const error = new Error("A language is required.");
+      return this.handleError(error, 1);
+    }
+    const langs = unibeautify.findLanguages({ name: language });
+    if (langs.length === 0) {
+      const allLanguages = getAllLanguages();
+      const distances: number[] = allLanguages.map(lang =>
+        levenshtein.get(lang.toLowerCase(), language.toLowerCase())
+      );
+      const bestDistance: number = Math.min(...distances);
+      const distanceThreshold = 2;
+      const bestMatchLanguages = allLanguages.filter(
+        (lang, index) =>
+          distances[index] <= Math.min(distanceThreshold, bestDistance)
+      );
+      if (bestMatchLanguages.length > 0) {
+        const limit = 3;
+        const error = new Error(
+          `Language '${language}' was not found. Did you mean:\n${bestMatchLanguages
+            .slice(0, limit)
+            .map(lang => `  - ${lang}`)
+            .join("\n")}`
+        );
+        return this.handleError(error, 1);
+      }
+    }
+    return Promise.resolve();
   }
 }
 
