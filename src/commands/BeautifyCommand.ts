@@ -1,5 +1,5 @@
 import { BeautifyData, Unibeautify } from "unibeautify";
-import cosmiconfig from "cosmiconfig";
+import * as cosmiconfig from "cosmiconfig";
 import * as fs from "fs";
 import * as levenshtein from "fast-levenshtein";
 
