@@ -1,6 +1,6 @@
 # Unibeautify-CLI
 
-[![Build Status](https://travis-ci.com/Unibeautify/unibeautify-cli.svg?branch=master)](https://travis-ci.com/Unibeautify/unibeautify-cli) [![Build status](https://ci.appveyor.com/api/projects/status/au135a4m4x4omfpa/branch/master?svg=true)](https://ci.appveyor.com/project/Glavin001/unibeautify-cli/branch/master) [![Maintainability](https://api.codeclimate.com/v1/badges/8547ff73a2419bbabf92/maintainability)](https://codeclimate.com/github/Unibeautify/unibeautify-cli/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8547ff73a2419bbabf92/test_coverage)](https://codeclimate.com/github/Unibeautify/unibeautify-cli/test_coverage)
+[![Build Status](https://travis-ci.com/Unibeautify/cli.svg?branch=master)](https://travis-ci.com/Unibeautify/cli) [![Maintainability](https://api.codeclimate.com/v1/badges/8547ff73a2419bbabf92/maintainability)](https://codeclimate.com/github/Unibeautify/unibeautify-cli/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8547ff73a2419bbabf92/test_coverage)](https://codeclimate.com/github/Unibeautify/unibeautify-cli/test_coverage)
 
 > CLI for [Unibeautify](https://github.com/Unibeautify/unibeautify)
 
@@ -35,9 +35,9 @@ Options:
   --config-file, -c  Beautifier configuration file                      [string]
   --config-json      Beautifier configuration as stringified JSON       [string]
   --file-path, -f    Path of the file to beautify from stdin            [string]
+  --inplace, -i      Replace file(s) with beautified results [boolean] [default: false]  
   --language, -l     Language of file to beautify            [string] [required]
   --out-file, -o     Output file of beautified results                  [string]
-  --replace, -r      Replace file(s) with beautified results [boolean] [default: false]
 
 ```
 ```bash
