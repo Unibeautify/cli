@@ -1,6 +1,6 @@
 # Unibeautify-CLI
 
-[![Build Status](https://travis-ci.com/Unibeautify/cli.svg?branch=master)](https://travis-ci.com/Unibeautify/cli) [![![Maintainability](https://api.codeclimate.com/v1/badges/722b515b28d1bb71b6c7/maintainability)](https://codeclimate.com/github/Unibeautify/cli/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/722b515b28d1bb71b6c7/test_coverage)](https://codeclimate.com/github/Unibeautify/cli/test_coverage)
+[![Build Status](https://travis-ci.com/Unibeautify/cli.svg?branch=master)](https://travis-ci.com/Unibeautify/cli) [![Maintainability](https://api.codeclimate.com/v1/badges/722b515b28d1bb71b6c7/maintainability)](https://codeclimate.com/github/Unibeautify/cli/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/722b515b28d1bb71b6c7/test_coverage)](https://codeclimate.com/github/Unibeautify/cli/test_coverage)
 
 > CLI for [Unibeautify](https://github.com/Unibeautify/unibeautify)
 
