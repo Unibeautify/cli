@@ -51,9 +51,9 @@ program
     },
     command: "*",
     describe: "Beautify Files",
-    handler: argv => {
+    handler: (args: any) => {
       const main = new BeautifyCommand();
-      main.beautify(argv).catch((error: Error) => {});
+      main.beautify(args).catch((error: Error) => {});
     },
   })
   .command({
@@ -86,9 +86,9 @@ program
     },
     command: "support",
     describe: "List languages and beautifiers",
-    handler: argv => {
+    handler: (args: any) => {
       const main = new SupportCommand();
-      main.support(argv).catch((error: Error) => {});
+      main.support(args).catch((error: Error) => {});
     },
   })
   .help().argv;
