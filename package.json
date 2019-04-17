@@ -57,7 +57,7 @@
     "ts-jest": "24.0.2",
     "tslint": "5.16.0",
     "typedoc": "0.14.2",
-    "typescript": "3.4.2"
+    "typescript": "3.4.3"
   },
   "dependencies": {
     "chalk": "^2.4.1",
