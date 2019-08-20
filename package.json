@@ -66,6 +66,6 @@
     "g-search": "^0.3.0",
     "requireg": "^0.2.1",
     "unibeautify": "^0.17.0",
-    "yargs": "^13.0.0"
+    "yargs": "^14.0.0"
   }
 }
