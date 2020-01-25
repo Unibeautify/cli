@@ -56,7 +56,7 @@
     "rimraf": "3.0.0",
     "ts-jest": "24.3.0",
     "tslint": "5.20.1",
-    "typedoc": "0.16.8",
+    "typedoc": "0.16.9",
     "typescript": "3.5.3"
   },
   "dependencies": {
