@@ -150,8 +150,8 @@ describe("BeautifyCommand", () => {
           expect(catchCb).toHaveBeenCalled();
           expect(catchCb.mock.calls).toHaveLength(1);
           expect(catchCb.mock.calls[0]).toHaveLength(1);
-          expect((<any>catchCb.mock.calls[0][0]).message).toBe(
-            "ENOENT: no such file or directory, open 'test/test2.js'"
+          expect((<any>catchCb.mock.calls[0][0]).message).toMatch(
+            /^ENOENT: no such file or directory, open '.*test.test2\.js'$/
           );
         });
     });
