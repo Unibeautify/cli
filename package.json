@@ -60,7 +60,7 @@
     "typescript": "3.5.3"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
+    "chalk": "^4.0.0",
     "cosmiconfig": "^5.0.7",
     "fast-levenshtein": "^2.0.6",
     "g-search": "^0.3.0",
