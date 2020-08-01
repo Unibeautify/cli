@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "cosmiconfig": "^5.0.7",
+    "cosmiconfig": "^7.0.0",
     "fast-levenshtein": "^2.0.6",
     "g-search": "^0.3.0",
     "requireg": "^0.2.1",
