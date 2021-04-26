@@ -47,7 +47,7 @@
   "devDependencies": {
     "@types/cosmiconfig": "5.0.3",
     "@types/fast-levenshtein": "0.0.1",
-    "@types/jest": "24.9.1",
+    "@types/jest": "26.0.23",
     "@types/yargs": "13.0.4",
     "@unibeautify/beautifier-eslint": "0.6.0",
     "eslint": "5.16.0",
