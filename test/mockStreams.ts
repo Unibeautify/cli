@@ -3,7 +3,7 @@ import { Writable, Readable } from "stream";
 export function createMockWritableStream(): MockWritableStream {
   const ws: Writable & { rawData: string } = new Writable() as any;
   ws.rawData = "";
-  ws._write = function(chunk: string, enc: string, next: Function) {
+  ws._write = function (chunk: string, enc: string, next: Function) {
     ws.rawData += chunk;
     next();
   };
@@ -20,7 +20,7 @@ export function createMockReadableStream(
 ): NodeJS.ReadStream {
   const rs: any = new Readable();
   rs.isTTY = isTTY;
-  rs._read = function() {
+  rs._read = function () {
     rs.emit("data", rawData);
     rs.emit("end");
   };
