@@ -4,14 +4,12 @@ const { devDependencies } = pkg;
 
 const globalModules = fakeGlobalModules();
 
-module.exports = function() {
+module.exports = function () {
   return Promise.resolve(globalModules);
 };
 
 function fakeGlobalModules() {
-  return Object.keys(devDependencies)
-    .map(getModuleDetails)
-    .filter(Boolean);
+  return Object.keys(devDependencies).map(getModuleDetails).filter(Boolean);
 }
 
 function getModuleDetails(moduleName) {
