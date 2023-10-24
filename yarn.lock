@@ -4209,9 +4209,7 @@ uglify-js@^3.1.4:
     source-map "~0.6.1"
 
 unibeautify@^0.17.0:
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/unibeautify/-/unibeautify-0.17.0.tgz#990287dae1dff657c835e03c8d6ae4cfb445b8d3"
-  integrity sha512-ush+UKnFFW2E3aZbeXlpTzSDV3fqQ9wjamqYO9wS1zG2k7oK7Gr0SJtSIcym7Ny98aJKzFkAWM9f+zQMQqOLzQ==
+  version "0.17.1"
   dependencies:
     diff "^3.5.0"
     lodash "^4.17.10"
