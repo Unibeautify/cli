@@ -1123,15 +1123,10 @@ diff-sequences@^24.9.0:
   resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-24.9.0.tgz#5715d6244e2aa65f48bba0bc972db0b0b11e95b5"
   integrity sha512-Dj6Wk3tWyTE+Fo1rW8v0Xhwk80um6yFYKbuAxc9c3EZxIHFDYwbi34Uk42u1CdnIiVorvt4RmlSDjIPyzGC2ew==
 
-diff@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
-  integrity sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==
-
 diff@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.1.tgz#0c667cb467ebbb5cea7f14f135cc2dba7780a8ff"
-  integrity sha512-s2+XdvhPCOF01LRQBC8hf4vhbVmI2CGS5aZnxLJlT5FtdhPCDFq80q++zK2KlrVorVDdL5BOGZ/VfLrVtYNF+Q==
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.4.tgz#7a6dbfda325f25f07517e9b518f897c08332e07d"
+  integrity sha512-X07nttJQkwkfKfvTPG/KSnE2OMdcUCao6+eXF3wmnIQRn2aPAHH3VxDbDOdegkd6JbPsXqShpvEOHfAT+nCNwQ==
 
 doctrine@^3.0.0:
   version "3.0.0"
@@ -2692,10 +2687,15 @@ lodash.sortby@^4.7.0:
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
-lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11:
+lodash@^4.13.1, lodash@^4.17.10:
   version "4.17.14"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
   integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
+
+lodash@^4.17.11:
+  version "4.18.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.18.1.tgz#ff2b66c1f6326d59513de2407bf881439812771c"
+  integrity sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==
 
 lodash@^4.17.15:
   version "4.17.15"
@@ -3483,15 +3483,6 @@ require-main-filename@^2.0.0:
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
   integrity sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==
 
-requireg@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/requireg/-/requireg-0.2.0.tgz#4e1c217be770fe62965208075d6162afb4594806"
-  integrity sha512-4Sdw2qXsTq8UOQjPzWhweXcE3tqx68Wh/7Nv9oqjmm6AV2h0Zh9ZeHHIvs1+KJEh5ShAUGrOpbRsAPvwIS9GRg==
-  dependencies:
-    nested-error-stacks "~2.0.1"
-    rc "~1.2.7"
-    resolve "~1.7.1"
-
 requireg@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/requireg/-/requireg-0.2.1.tgz#f8822f38181b73211d631b5842507dbde4baecdf"
@@ -3641,6 +3632,11 @@ semver@^5.5, semver@^5.5.1:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.1.tgz#7dfdd8814bdb7cabc7be0fb1d734cfb66c940477"
   integrity sha512-PqpAxfrEhlSUWge8dwIp4tZnQ25DIOthpiaHNIthsjEFQD6EvqUKUDM7L8O2rShkFccYo1VjJR0coWfNkCubRw==
+
+semver@^6.0.0:
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.1.tgz#556d2ef8689146e46dcea4bfdd095f3434dffcb4"
+  integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 semver@^6.2.0, semver@^6.3.0:
   version "6.3.0"
@@ -4208,15 +4204,15 @@ uglify-js@^3.1.4:
     commander "~2.20.0"
     source-map "~0.6.1"
 
-unibeautify@^0.17.0:
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/unibeautify/-/unibeautify-0.17.0.tgz#990287dae1dff657c835e03c8d6ae4cfb445b8d3"
-  integrity sha512-ush+UKnFFW2E3aZbeXlpTzSDV3fqQ9wjamqYO9wS1zG2k7oK7Gr0SJtSIcym7Ny98aJKzFkAWM9f+zQMQqOLzQ==
+unibeautify@^0.17.1:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/unibeautify/-/unibeautify-0.17.1.tgz#56179afe356cb5084742664e5f6664e2b391f229"
+  integrity sha512-7cVUgfESS4j5PfYbJ5c4oCGXW5Cs68iiayJbexkPmqAZ7MQ7xIRYnPY7w21ZmhR6r/YePG4S75SoL3/4TIAIVA==
   dependencies:
-    diff "^3.5.0"
-    lodash "^4.17.10"
-    requireg "^0.2.0"
-    semver "^5.5.0"
+    diff "^4.0.1"
+    lodash "^4.17.11"
+    requireg "^0.2.1"
+    semver "^6.0.0"
 
 union-value@^1.0.0:
   version "1.0.0"
